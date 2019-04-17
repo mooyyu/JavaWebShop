@@ -46,4 +46,13 @@
         <servlet-name>indexServlet</servlet-name>
         <url-pattern>/shop/indexServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>searchServlet</servlet-name>
+        <servlet-class>shop.searchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>searchServlet</servlet-name>
+        <url-pattern>/shop/searchServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

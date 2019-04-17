@@ -41,6 +41,12 @@
       <jsp:include page="../components/aside.jsp"></jsp:include>
 
       <div class="col-9" style="min-height: 80vh;" id="pagination">
+        <div class="container">
+          <div class="alert alert-primary" role="alert">
+            <c:out value="${showTitle}"></c:out>
+          </div>
+        </div>
+
         <div class="container-fluid">
           <c:forEach var="item" items="${itemlist}">
             <div class="card float-left m-1 d-none" style="width: 12rem;" id="${item.rownum}" >
