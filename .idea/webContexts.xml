@@ -10,6 +10,7 @@
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/pagination.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/right_side.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components" />
         <entry key="file://$PROJECT_DIR$/web/index.jsp" value="file://$PROJECT_DIR$/web" />
+        <entry key="file://$PROJECT_DIR$/web/login.jsp" value="file://$PROJECT_DIR$/web" />
       </map>
     </option>
   </component>

@@ -55,4 +55,13 @@
         <servlet-name>searchServlet</servlet-name>
         <url-pattern>/shop/searchServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>checkLoginServlet</servlet-name>
+        <servlet-class>shop.checkLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>checkLoginServlet</servlet-name>
+        <url-pattern>/shop/checkLoginServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
