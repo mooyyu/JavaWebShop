@@ -2,9 +2,11 @@ package shop;
 
 import shop.utils.parseJson;
 import shop.Dao.connectDao;
+import shop.utils.md5;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,6 +46,15 @@ public class checkLoginServlet extends HttpServlet {
         Map<String, String> loginInfo = parseJson.parseJsonForLogin(sb.toString());
         connectDao con = new connectDao();
         if (con.checkLogin(loginInfo.get("email"), loginInfo.get("password"))) {
+            Cookie cookie = null;
+
+            cookie = new Cookie("logined_email", loginInfo.get("email"));
+            cookie.setMaxAge(-1);
+            response.addCookie(cookie);
+            cookie = new Cookie("check_str", md5.createMD5(loginInfo.get("password")));
+            cookie.setMaxAge(-1);
+            response.addCookie(cookie);
+
             writer.print("yes");
         } else {
             writer.print("no");

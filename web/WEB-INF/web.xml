@@ -64,4 +64,13 @@
         <servlet-name>checkLoginServlet</servlet-name>
         <url-pattern>/shop/checkLoginServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>getUserForHeaderServlet</servlet-name>
+        <servlet-class>shop.getUserForHeaderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getUserForHeaderServlet</servlet-name>
+        <url-pattern>/shop/getUserForHeaderServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

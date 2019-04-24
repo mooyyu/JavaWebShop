@@ -31,8 +31,8 @@
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+            <li id="user_center" class="nav-item">
+                <a class="nav-link" v-bind:href="hrefValue">{{cur_user}}.{{center_link}}</a>
             </li>
         </ul>
         <span class="form-inline my-2 my-lg-0" id="search">
@@ -42,4 +42,5 @@
     </div>
 </nav>
 
+<script src="/resource/function/getCurUser.js?v=1.3"></script>
 <script src="/resource/function/search.js?v=1.4"></script>

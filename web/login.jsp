@@ -51,30 +51,6 @@
     <a href="?medthod=register" class="badge badge-pill badge-warning float-right">还没有账号,注册一个</a>
 </div>
 
-<script>
-    var loginapp = new Vue({
-        el: "div#login",
-        data: {
-            email: "",
-            password: ""
-        },
-        methods: {
-            submit: function() {
-                axios.post('/shop/checkLoginServlet?method=login', {
-                    email: loginapp.email,
-                    password: loginapp.password
-                }).then(function(res) {
-                    if (res.data == "yes") {
-                        window.location.href = "/";
-                    } else {
-                        alert("邮箱或密码错误！");
-                    }
-                }).catch(function(error) {
-                    console.info(error);
-                });
-            }
-        }
-    })
-</script>
+<script src="resource/function/login.js"></script>
 </body>
 </html>
