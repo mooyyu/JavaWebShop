@@ -17,7 +17,7 @@
 
     <title></title>
 </head>
-<body>
+<body style="min-height: 100vh; position: relative;">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="/resource/js/jquery.min.js"></script>
@@ -32,24 +32,26 @@
 <div id="login" class="container jumbotron">
     <div class="alert alert-primary text-center" role="alert">登录</div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary" type="button">邮箱</button>
+    <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">邮箱:</label>
+        <div class="col-sm-10">
+            <input id="email" v-model:value="email" type="text" class="form-control" placeholder="请输入注册邮箱">
         </div>
-        <input id="email" v-model:value="email" type="text" class="form-control" placeholder="请输入注册邮箱">
     </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary" type="button">密码</button>
-        </div>
-        <input id="password" v-model:value="password" type="password" class="form-control" placeholder="请输入密码">
-        <div class="input-group-prepend">
-            <button class="btn bg-danger" type="button" v-on:click="submit">Submit</button>
+    <div class="form-group row">
+        <label for="password" class="col-sm-2 col-form-label">密码:</label>
+        <div class="col-sm-10 input-group">
+            <input id="password" v-model:value="password" type="password" class="form-control" placeholder="请输入密码">
+            <div class="input-group-prepend">
+                <button class="btn bg-danger" type="button" v-on:click="submit">Submit</button>
+            </div>
         </div>
     </div>
 
     <a href="?medthod=register" class="badge badge-pill badge-warning float-right">还没有账号,注册一个</a>
 </div>
+
+<jsp:include page="./WEB-INF/components/footer.jsp"></jsp:include>
 
 <script src="resource/function/login.js"></script>
 </body>

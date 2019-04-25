@@ -19,7 +19,7 @@
     
     <title>分享商城</title>
   </head>
-  <body>
+  <body style="min-height: 100vh; position: relative;">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="/resource/js/jquery.min.js"></script>

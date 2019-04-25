@@ -6,7 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4" id="header">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<div class="mb-4" style="height: 56px;"></div>
+<nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark" id="header">
     <a class="navbar-brand" href="#">分享书城</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,7 +34,14 @@
                 </div>
             </li>
             <li id="user_center" class="nav-item">
-                <a class="nav-link" v-bind:href="hrefValue">{{cur_user}}.{{center_link}}</a>
+                <c:choose>
+                    <c:when test="${empty cookie.userName.value}">
+                        <a class="nav-link" href="/login.jsp">游客.请登录</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="nav-link" href="/shop/userCenterServlet">${cookie.userName.value}</a>
+                    </c:otherwise>
+                </c:choose>
             </li>
         </ul>
         <span class="form-inline my-2 my-lg-0" id="search">
@@ -42,5 +51,4 @@
     </div>
 </nav>
 
-<script src="/resource/function/getCurUser.js?v=1.3"></script>
 <script src="/resource/function/search.js?v=1.4"></script>

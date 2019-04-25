@@ -66,11 +66,20 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>getUserForHeaderServlet</servlet-name>
-        <servlet-class>shop.getUserForHeaderServlet</servlet-class>
+        <servlet-name>userCenterServlet</servlet-name>
+        <servlet-class>shop.userCenterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>getUserForHeaderServlet</servlet-name>
-        <url-pattern>/shop/getUserForHeaderServlet</url-pattern>
+        <servlet-name>userCenterServlet</servlet-name>
+        <url-pattern>/shop/userCenterServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>exitLoginServlet</servlet-name>
+        <servlet-class>shop.exitLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>exitLoginServlet</servlet-name>
+        <url-pattern>/shop/exitLoginServlet</url-pattern>
     </servlet-mapping>
 </web-app>

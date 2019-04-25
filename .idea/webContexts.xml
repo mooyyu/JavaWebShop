@@ -9,8 +9,17 @@
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/header.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/pagination.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/right_side.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userAside.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/bookshelf.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/collect.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/default.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/exit.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/message.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/order.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/standings.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
         <entry key="file://$PROJECT_DIR$/web/index.jsp" value="file://$PROJECT_DIR$/web" />
         <entry key="file://$PROJECT_DIR$/web/login.jsp" value="file://$PROJECT_DIR$/web" />
+        <entry key="file://$PROJECT_DIR$/web/userCenter.jsp" value="file://$PROJECT_DIR$/web" />
       </map>
     </option>
   </component>
