@@ -82,4 +82,13 @@
         <servlet-name>exitLoginServlet</servlet-name>
         <url-pattern>/shop/exitLoginServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>updateUserServlet</servlet-name>
+        <servlet-class>shop.updateUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateUserServlet</servlet-name>
+        <url-pattern>/shop/updateUserServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

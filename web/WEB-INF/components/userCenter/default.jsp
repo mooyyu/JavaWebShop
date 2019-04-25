@@ -15,11 +15,11 @@
 
 <div class="alert alert-info" role="alert">我的内容</div>
 <hr>
-<form method="post">
+<div id="form">
     <div class="form-group row">
         <label for="inputname" class="col-sm-2 col-form-label text-right">昵称:</label>
         <div class="col-sm-10">
-            <input type="text" maxlength="10" class="form-control" id="inputname" name="name" value="${user.name}">
+            <input v-model="name" type="text" maxlength="10" class="form-control" name="name">
         </div>
     </div>
     <div class="form-group row">
@@ -33,13 +33,13 @@
             <legend class="col-form-label col-sm-2 pt-0 text-right">性别:</legend>
             <div class="col-sm-10">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="sex" id="sexmale" value="male" ${user.sex == 1 ? "checked" : ""}>
+                    <input v-model="sex" class="form-check-input" type="radio" name="sex" value="1" ${user.sex == 1 ? "checked" : ""}>
                     <label class="form-check-label" for="gridRadios1">
                         小公子
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="sex" id="sexfemale" value="female" ${user.sex == 2 ? "checked" : ""}>
+                    <input v-model="sex" class="form-check-input" type="radio" name="sex" value="2" ${user.sex == 2 ? "checked" : ""}>
                     <label class="form-check-label" for="gridRadios2">
                         小姑凉
                     </label>
@@ -50,25 +50,57 @@
     <div class="form-group row">
         <label for="inputphone" class="col-sm-2 col-form-label text-right">手机号:</label>
         <div class="col-sm-10">
-            <input type="number" oninput="if(value.length>11)value=value.slice(0,11)" class="form-control" id="inputphone" name="phone" value="${user.phone}">
+            <input v-model="phone" type="number" oninput="if(value.length>11)value=value.slice(0,11)" class="form-control" name="phone">
         </div>
     </div>
     <div class="form-group row">
         <label for="inputarea" class="col-sm-2 col-form-label text-right">收货地址:</label>
         <div class="col-sm-10">
-            <textarea maxlength="100" rows="2" class="form-control" name="address">${user.address}</textarea>
+            <textarea id="address" maxlength="100" rows="2" class="form-control" name="address">${user.address}</textarea>
         </div>
     </div>
     <div class="form-group row">
         <label for="inputinfo" class="col-sm-2 col-form-label text-right">个人简介:</label>
         <div class="col-sm-10">
-            <textarea maxlength="250" rows="6" class="form-control" name="info">${user.info}</textarea>
+            <textarea id="info" maxlength="250" rows="6" class="form-control" name="info">${user.info}</textarea>
         </div>
     </div>
     <div class="form-group row justify-content-end">
-        <button type="submit" class="btn btn-primary mr-sm-4">Submit</button>
+        <button v-on:click="submit" class="btn btn-primary mr-sm-4">Submit</button>
     </div>
-</form>
+</div>
+
+<script>
+    var updateUserApp = new Vue({
+        el: "div#form",
+        data: {
+            name: "${user.name}",
+            sex: "${user.sex}",
+            phone: "${user.phone}"
+        },
+        methods: {
+            submit: function() {
+                axios.post('/shop/updateUserServlet', {
+                    name: updateUserApp.name,
+                    email: "${user.email}",
+                    check_str: "${cookie.check_str.value}",
+                    sex: updateUserApp.sex,
+                    phone: updateUserApp.phone,
+                    address: $("textarea#address")[0].value,
+                    info: $("textarea#info")[0].value
+                }).then(function(res) {
+                    if (res.data == "yes") {
+                        location.reload();
+                    } else {
+                        window.location.href = "/";
+                    }
+                }).catch(function(error) {
+                    console.info(error);
+                })
+            }
+        }
+    })
+</script>
 
 <hr>
 

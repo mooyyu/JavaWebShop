@@ -1,6 +1,6 @@
 package shop;
 
-import shop.utils.parseJson;
+import org.json.JSONObject;
 import shop.Dao.connectDao;
 import shop.utils.md5;
 import shop.Dao.CookieDaoServlet;
@@ -44,15 +44,15 @@ public class checkLoginServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter writer = response.getWriter();
 
-        Map<String, String> loginInfo = parseJson.parseJsonForLogin(sb.toString());
+        JSONObject loginInfo = new JSONObject(sb.toString());
         connectDao con = new connectDao();
-        if (con.checkLogin(loginInfo.get("email"), loginInfo.get("password"))) {
+        if (con.checkLogin(loginInfo.getString("email"), loginInfo.getString("password"))) {
             CookieDaoServlet cookieDao = new CookieDaoServlet();
 
-            cookieDao.addCookie(response, "logined_email", loginInfo.get("email"), -1);
-            cookieDao.addCookie(response, "check_str", md5.createMD5(loginInfo.get("password")), -1);
+            cookieDao.addCookie(response, "logined_email", loginInfo.getString("email"), -1);
+            cookieDao.addCookie(response, "check_str", md5.createMD5(loginInfo.getString("password")), -1);
             cookieDao.addCookie(response, "isLogin", "true", -1);
-            cookieDao.addCookie(response, "userName", con.getUserName(loginInfo.get("email")), -1);
+            cookieDao.addCookie(response, "userName", con.getUserName(loginInfo.getString("email")), -1);
 
             writer.print("yes");
         } else {

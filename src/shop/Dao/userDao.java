@@ -1,11 +1,11 @@
 package shop.Dao;
 
-import cn.itcast.jdbc.TxQueryRunner;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import shop.Dao.connectDao;
 import shop.obj.user;
 
+import cn.itcast.jdbc.TxQueryRunner;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,5 +24,14 @@ public class userDao {
             e.printStackTrace();
         }
         return u;
+    }
+
+    public void updateUser(String name, String email, int sex, String phone, String address, String info) {
+        try {
+            String sql = "update user set name=?, sex=?, phone=?, address=?, info=? where email=?;";
+            qr.update(sql, name, sex, phone, address, info, email);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
