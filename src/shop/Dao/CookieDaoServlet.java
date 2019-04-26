@@ -54,4 +54,15 @@ public class CookieDaoServlet extends HttpServlet {
             }
         }
     }
+
+    public void updateNameAndSex(HttpServletResponse response, String name, String sex) {
+        Cookie cookie = new Cookie("userName", name);
+        cookie.setMaxAge(-1);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        cookie = new Cookie("userSex", sex);
+        cookie.setMaxAge(-1);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+    }
 }

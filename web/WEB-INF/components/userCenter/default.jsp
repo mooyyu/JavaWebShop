@@ -13,6 +13,14 @@
 <% user u = new userDao().getUser((String)pageContext.getAttribute("email")); %>
 <c:set var="user" value="<%=u%>"></c:set>
 
+<script>
+    var user_name = "${user.name}";
+    var user_sex = "${user.sex}";
+    var user_phone = "${user.phone}";
+    var user_email = "${user.email}";
+    var check_str = "${cookie.check_str.value}";
+</script>
+
 <div class="alert alert-info" role="alert">我的内容</div>
 <hr>
 <div id="updateUserForm">
@@ -70,38 +78,6 @@
     </div>
 </div>
 
-<script>
-    var updateUserApp = new Vue({
-        el: "div#updateUserForm",
-        data: {
-            name: "${user.name}",
-            sex: "${user.sex}",
-            phone: "${user.phone}"
-        },
-        methods: {
-            submit: function() {
-                axios.post('/shop/updateUserServlet', {
-                    name: updateUserApp.name,
-                    email: "${user.email}",
-                    check_str: "${cookie.check_str.value}",
-                    sex: updateUserApp.sex,
-                    phone: updateUserApp.phone,
-                    address: $("textarea#address")[0].value,
-                    info: $("textarea#info")[0].value
-                }).then(function(res) {
-                    if (res.data == "yes") {
-                        location.reload();
-                    } else {
-                        window.location.href = "/";
-                    }
-                }).catch(function(error) {
-                    console.info(error);
-                })
-            }
-        }
-    });
-</script>
-
 <hr>
 
 <div class="alert alert-danger" role="alert">更改密码</div>
@@ -150,4 +126,4 @@
     </div>
 </div>
 
-<script src="/resource/function/updatePwd.js"></script>
+<script src="/resource/function/updateUserAndPwd.js"></script>

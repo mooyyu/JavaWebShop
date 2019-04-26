@@ -1,3 +1,33 @@
+var updateUserApp = new Vue({
+    el: "div#updateUserForm",
+    data: {
+        name: user_name,
+        sex: user_sex,
+        phone: user_phone
+    },
+    methods: {
+        submit: function() {
+            axios.post('/shop/updateUserServlet', {
+                name: updateUserApp.name,
+                email: user_email,
+                check_str: check_str,
+                sex: updateUserApp.sex,
+                phone: updateUserApp.phone,
+                address: $("textarea#address")[0].value,
+                info: $("textarea#info")[0].value
+            }).then(function(res) {
+                if (res.data == "yes") {
+                    location.reload();
+                } else {
+                    window.location.href = "/";
+                }
+            }).catch(function(error) {
+                console.info(error);
+            })
+        }
+    }
+});
+
 var updatePwdApp = new Vue({
     el: "div#updatePwdForm",
     data: {

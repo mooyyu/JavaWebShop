@@ -13,7 +13,7 @@
 </script>
 
 <div class="card" style="width: 18rem;">
-    <img class="card-img-top w-50 mt-5 mx-auto" src="../../../resource/img/male.svg" alt="Card image cap">
+    <img class="card-img-top w-50 mt-5 mx-auto" src="/resource/img/${cookie.userSex.value == "2" ? "female" : "male"}.svg" alt="Card image cap">
     <div class="card-body">
         <p class="card-text text-center">${cookie.userName.value}</p>
     </div>

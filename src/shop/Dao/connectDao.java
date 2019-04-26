@@ -13,6 +13,19 @@ import java.util.Map;
 public class connectDao {
     private QueryRunner qr = new TxQueryRunner();
 
+    public boolean checkStatus(String email) {
+        try {
+            String sql = String.format("select status from user where email = '%s' limit 1;", email);
+            Number num = (Number)qr.query(sql, new ScalarHandler());
+            if (num.intValue() == 2) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public boolean checkEmail(String email) {
         try {
             String sql = String.format("select count(1) from user where email = '%s';", email);
@@ -28,8 +41,8 @@ public class connectDao {
 
     public boolean checkLogin(String email, String password) {
         try {
-            if (checkEmail(email)) {
-                String sql = String.format("select password from user where email = '%s';", email);
+            if (checkStatus(email)) {
+                String sql = String.format("select password from user where email = '%s' limit 1;", email);
                 String pwd = (String)qr.query(sql, new ScalarHandler());
                 if (pwd.equals(md5.createMD5(password))) {
                     return true;
@@ -43,28 +56,14 @@ public class connectDao {
 
     public boolean checkLogined(String email, String checkStr) {
         try {
-            if (checkEmail(email)) {
-                String sql = String.format("select password from user where email = '%s';", email);
-                String pwd = (String)qr.query(sql, new ScalarHandler());
-                if (pwd.equals(checkStr)) {
-                    return true;
-                }
+            String sql = String.format("select password from user where email = '%s' limit 1;", email);
+            String pwd = (String)qr.query(sql, new ScalarHandler());
+            if (pwd.equals(checkStr)) {
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public String getUserName(String email) {
-        try {
-            if (checkEmail(email)) {
-                String sql = String.format("select name from user where email = '%s';", email);
-                return (String)qr.query(sql, new ScalarHandler());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return "Error";
     }
 }

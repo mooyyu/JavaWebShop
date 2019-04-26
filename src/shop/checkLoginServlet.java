@@ -2,6 +2,7 @@ package shop;
 
 import org.json.JSONObject;
 import shop.Dao.connectDao;
+import shop.Dao.userDao;
 import shop.utils.md5;
 import shop.Dao.CookieDaoServlet;
 
@@ -15,7 +16,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Map;
 
 @WebServlet(name = "checkLoginServlet")
 public class checkLoginServlet extends HttpServlet {
@@ -24,13 +24,40 @@ public class checkLoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String method = request.getParameter("method");
         if (method.equals("register")) {
-
+            register(request, response);
         } else if (method.equals("login")) {
-            checkLogin(request, response);
+            login(request, response);
         }
     }
 
-    private void checkLogin(HttpServletRequest request, HttpServletResponse response)
+    private void register(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        BufferedReader br = request.getReader();
+        StringBuilder sb = new StringBuilder("");
+
+        String str;
+        while ((str = br.readLine()) != null) {
+            sb.append(str);
+        }
+        br.close();
+
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter writer = response.getWriter();
+
+        JSONObject registerInfo = new JSONObject(sb.toString());
+
+        writer.println(registerInfo.getString("name"));
+        writer.println(registerInfo.getString("email"));
+        writer.println(registerInfo.getString("phone"));
+        writer.println(registerInfo.getString("sex"));
+        writer.println(registerInfo.getString("address"));
+        writer.println(registerInfo.getString("info"));
+        writer.println(registerInfo.getString("pwd"));
+        writer.println(registerInfo.getString("confirmPwd"));
+    }
+
+    private void login(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BufferedReader br = request.getReader();
         StringBuilder sb = new StringBuilder("");
@@ -45,14 +72,15 @@ public class checkLoginServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
 
         JSONObject loginInfo = new JSONObject(sb.toString());
-        connectDao con = new connectDao();
-        if (con.checkLogin(loginInfo.getString("email"), loginInfo.getString("password"))) {
+        userDao con = new userDao();
+        if (new connectDao().checkLogin(loginInfo.getString("email"), loginInfo.getString("password"))) {
             CookieDaoServlet cookieDao = new CookieDaoServlet();
 
             cookieDao.addCookie(response, "logined_email", loginInfo.getString("email"), -1);
             cookieDao.addCookie(response, "check_str", md5.createMD5(loginInfo.getString("password")), -1);
             cookieDao.addCookie(response, "isLogin", "true", -1);
             cookieDao.addCookie(response, "userName", con.getUserName(loginInfo.getString("email")), -1);
+            cookieDao.addCookie(response, "userSex", con.getUserSex(loginInfo.getString("email")), -1);
 
             writer.print("yes");
         } else {

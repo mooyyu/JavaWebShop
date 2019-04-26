@@ -1,5 +1,6 @@
 package shop.Dao;
 
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import shop.Dao.connectDao;
 import shop.obj.user;
 import shop.utils.md5;
@@ -23,6 +24,26 @@ public class userDao {
             e.printStackTrace();
         }
         return u;
+    }
+
+    public String getUserName(String email) {
+        try {
+            String sql = String.format("select name from user where email = '%s' limit 1;", email);
+            return (String)qr.query(sql, new ScalarHandler());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Error";
+    }
+
+    public String getUserSex(String email) {
+        try {
+            String sql = String.format("select sex from user where email = '%s' limit 1;", email);
+            return ((Number)qr.query(sql, new ScalarHandler())).toString();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "0";
     }
 
     public void updateUser(String name, String email, int sex, String phone, String address, String info) {

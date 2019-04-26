@@ -3,6 +3,7 @@ package shop;
 import shop.Dao.userDao;
 import shop.Dao.connectDao;
 import org.json.JSONObject;
+import shop.Dao.CookieDaoServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,6 +37,7 @@ public class updateUserServlet extends HttpServlet {
                     user.getString("phone"),
                     user.getString("address"),
                     user.getString("info"));
+            new CookieDaoServlet().updateNameAndSex(response, user.getString("name"), user.getString("sex"));
 
             response.getWriter().print("yes");
         } else {

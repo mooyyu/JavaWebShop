@@ -7,6 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="mt-5" style="height: 56px;"></div>
-<div id="footer" class="fixed-bottom bg-dark text-center py-3 text-white" style="position: absolute; bottom: 0;">
+<div id="footer" class="fixed-bottom bg-dark text-center py-3 text-white" style="position: absolute; bottom: 0; user-select: none;">
     分享书城 CopyRight © 2019 MOOYYU
 </div>
