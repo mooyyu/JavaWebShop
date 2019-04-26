@@ -15,7 +15,7 @@
 
 <div class="alert alert-info" role="alert">我的内容</div>
 <hr>
-<div id="form">
+<div id="updateUserForm">
     <div class="form-group row">
         <label for="inputname" class="col-sm-2 col-form-label text-right">昵称:</label>
         <div class="col-sm-10">
@@ -72,7 +72,7 @@
 
 <script>
     var updateUserApp = new Vue({
-        el: "div#form",
+        el: "div#updateUserForm",
         data: {
             name: "${user.name}",
             sex: "${user.sex}",
@@ -99,33 +99,55 @@
                 })
             }
         }
-    })
+    });
 </script>
 
 <hr>
 
 <div class="alert alert-danger" role="alert">更改密码</div>
 <hr>
-<form method="post">
+<div id="updatePwdForm">
     <div class="form-group row">
         <label for="oldpwd" class="col-sm-2 col-form-label text-right">原密码:</label>
         <div class="col-sm-10">
-            <input type="password" maxlength="26" class="form-control" id="oldpwd" name="oldpwd">
+            <input v-model="oldpwd" type="password" maxlength="26" class="form-control" id="oldpwd" name="oldpwd">
         </div>
     </div>
     <div class="form-group row">
         <label for="newpwd" class="col-sm-2 col-form-label text-right">新密码:</label>
         <div class="col-sm-10">
-            <input type="password" maxlength="26" class="form-control" id="newpwd" name="newpwd">
+            <input v-model="newpwd" type="password" maxlength="26" class="form-control" id="newpwd" name="newpwd">
         </div>
     </div>
     <div class="form-group row">
         <label for="confirmpwd" class="col-sm-2 col-form-label text-right">确认密码:</label>
         <div class="col-sm-10">
-            <input type="password" maxlength="26" class="form-control" id="confirmpwd" name="confirmpwd">
+            <input v-model="confirmpwd" type="password" maxlength="26" class="form-control" id="confirmpwd" name="confirmpwd">
         </div>
     </div>
     <div class="form-group row justify-content-end">
-        <button type="submit" class="btn btn-danger mr-sm-4">确认更改</button>
+        <button v-on:click="submit" class="btn btn-danger mr-sm-4">确认更改</button>
     </div>
-</form>
+
+    <!-- Modal -->
+    <div class="modal fade" id="updatePwdAns" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">更改结果</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ans}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{closeButtonValue}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/resource/function/updatePwd.js"></script>

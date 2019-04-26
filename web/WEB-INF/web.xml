@@ -91,4 +91,13 @@
         <servlet-name>updateUserServlet</servlet-name>
         <url-pattern>/shop/updateUserServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>updatePwdServlet</servlet-name>
+        <servlet-class>shop.updatePwdServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updatePwdServlet</servlet-name>
+        <url-pattern>/shop/updatePwdServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

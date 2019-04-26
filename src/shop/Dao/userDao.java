@@ -2,13 +2,12 @@ package shop.Dao;
 
 import shop.Dao.connectDao;
 import shop.obj.user;
+import shop.utils.md5;
 
 import cn.itcast.jdbc.TxQueryRunner;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class userDao {
     private QueryRunner qr = new TxQueryRunner();
@@ -30,6 +29,15 @@ public class userDao {
         try {
             String sql = "update user set name=?, sex=?, phone=?, address=?, info=? where email=?;";
             qr.update(sql, name, sex, phone, address, info, email);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePwd(String email, String newpwd) {
+        try {
+            String sql = "update user set password=? where email=?;";
+            qr.update(sql, new md5().createMD5(newpwd), email);
         } catch (SQLException e) {
             e.printStackTrace();
         }

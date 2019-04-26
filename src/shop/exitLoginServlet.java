@@ -15,6 +15,10 @@ public class exitLoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         new CookieDaoServlet().clearCookie(request, response);
-        response.sendRedirect("/index.jsp");
+        if (request.getParameter("method").equals("relogin")) {
+            response.sendRedirect("/login.jsp");
+        } else {
+            response.sendRedirect("/index.jsp");
+        }
     }
 }

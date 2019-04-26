@@ -13,7 +13,7 @@ var loginapp = new Vue({
                 if (res.data == "yes") {
                     window.location.href = "/";
                 } else {
-                    alert("邮箱或密码错误！");
+                    $('div#modalalert').modal('show');
                 }
             }).catch(function(error) {
                 console.info(error);

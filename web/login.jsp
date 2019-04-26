@@ -41,14 +41,34 @@
     <div class="form-group row">
         <label for="password" class="col-sm-2 col-form-label">密码:</label>
         <div class="col-sm-10 input-group">
-            <input id="password" v-model:value="password" type="password" class="form-control" placeholder="请输入密码">
+            <input v-on:keyup.enter="submit" id="password" v-model:value="password" type="password" class="form-control" placeholder="请输入密码">
             <div class="input-group-prepend">
                 <button class="btn bg-danger" type="button" v-on:click="submit">Submit</button>
             </div>
         </div>
     </div>
 
-    <a href="?medthod=register" class="badge badge-pill badge-warning float-right">还没有账号,注册一个</a>
+    <a href="?method=register" class="badge badge-pill badge-warning float-right">还没有账号,注册一个</a>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalalert" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">登录失败</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                邮箱或密码错误！
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <jsp:include page="./WEB-INF/components/footer.jsp"></jsp:include>
