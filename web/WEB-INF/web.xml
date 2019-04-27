@@ -100,4 +100,13 @@
         <servlet-name>updatePwdServlet</servlet-name>
         <url-pattern>/shop/updatePwdServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>checkRegisterServlet</servlet-name>
+        <servlet-class>shop.checkRegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>checkRegisterServlet</servlet-name>
+        <url-pattern>/shop/checkRegisterServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

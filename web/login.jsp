@@ -164,6 +164,6 @@
 
 <jsp:include page="./WEB-INF/components/footer.jsp"></jsp:include>
 
-<script src="resource/function/login.js?v=1.0"></script>
+<script src="resource/function/login.js?v=1.5"></script>
 </body>
 </html>

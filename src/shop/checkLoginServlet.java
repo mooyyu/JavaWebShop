@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import shop.Dao.connectDao;
 import shop.Dao.userDao;
 import shop.utils.md5;
+import shop.utils.sendEmail;
 import shop.Dao.CookieDaoServlet;
 
 import javax.servlet.ServletException;
@@ -47,14 +48,45 @@ public class checkLoginServlet extends HttpServlet {
 
         JSONObject registerInfo = new JSONObject(sb.toString());
 
-        writer.println(registerInfo.getString("name"));
-        writer.println(registerInfo.getString("email"));
-        writer.println(registerInfo.getString("phone"));
-        writer.println(registerInfo.getString("sex"));
-        writer.println(registerInfo.getString("address"));
-        writer.println(registerInfo.getString("info"));
-        writer.println(registerInfo.getString("pwd"));
-        writer.println(registerInfo.getString("confirmPwd"));
+        String name = registerInfo.getString("name");
+        String email = registerInfo.getString("email");
+        String phone = registerInfo.getString("phone");
+        String sex = registerInfo.getString("sex");
+        String address = registerInfo.getString("address");
+        String info = registerInfo.getString("info");
+        String pwd = registerInfo.getString("pwd");
+        String confirmPwd = registerInfo.getString("confirmPwd");
+
+        if (name != null && email != null && phone != null && sex != null && address != null && info != null && pwd != null && confirmPwd != null) {
+            if (name != "" && email != "" && sex != "" && pwd != "" && confirmPwd != "") {
+                if (pwd.equals(confirmPwd)) {
+                    connectDao con = new connectDao();
+                    if (con.checkEmail(email)) {
+                        if (con.checkStatus(email)) {
+                            writer.println("此邮箱已注册成功.请直接登录!");
+                        } else {
+                            writer.println("此邮箱地址已注册,请检查邮件以完成注册!");
+                        }
+                    } else {
+                        if (new userDao().registerUser(name, email, Integer.valueOf(sex), phone, address, info, pwd)) {
+                            if (sendEmail.checkRegister(email, md5.createMD5(pwd))) {
+                                writer.println("已发送验证邮件至注册邮箱,请检查邮件以完成注册.");
+                            } else {
+                                writer.println("发送验证邮件失败,请联系管理员.");
+                            }
+                        } else {
+                            writer.println("注册失败.");
+                        }
+                    }
+                } else {
+                    writer.println("两次密码不一致!");
+                }
+            } else {
+                writer.println("请将必要信息填写完整!");
+            }
+        } else {
+            writer.println("Error!");
+        }
     }
 
     private void login(HttpServletRequest request, HttpServletResponse response)

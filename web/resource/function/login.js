@@ -35,21 +35,31 @@ var registerapp = new Vue({
     },
     methods: {
         register: function() {
-            axios.post('/shop/checkLoginServlet?method=register', {
-                name: registerapp.name,
-                email: registerapp.email,
-                sex: registerapp.sex,
-                phone: registerapp.phone,
-                pwd: registerapp.pwd,
-                confirmPwd: registerapp.confirmPwd,
-                address: $('textarea#address')[0].value,
-                info: $('textarea#info')[0].value
-            }).then(function(res) {
-                registerapp.registerAns = res.data;
+            if (registerapp.name != "" && registerapp.email != "" && registerapp.sex != "" && registerapp.pwd != "" && registerapp.confirmPwd != "") {
+                if (registerapp.pwd != registerapp.confirmPwd) {
+                    registerapp.registerAns = "两次密码不一致!";
+                    $('div#registeralert').modal('show');
+                } else {
+                    axios.post('/shop/checkLoginServlet?method=register', {
+                        name: registerapp.name,
+                        email: registerapp.email,
+                        sex: registerapp.sex,
+                        phone: registerapp.phone,
+                        pwd: registerapp.pwd,
+                        confirmPwd: registerapp.confirmPwd,
+                        address: $('textarea#address')[0].value,
+                        info: $('textarea#info')[0].value
+                    }).then(function(res) {
+                        registerapp.registerAns = "注册结果:" + res.data;
+                        $('div#registeralert').modal('show');
+                    }).catch(function(error) {
+                        console.info(error);
+                    });
+                }
+            } else {
+                registerapp.registerAns = "请将必要信息填写完整!";
                 $('div#registeralert').modal('show');
-            }).catch(function(error) {
-                console.info(error);
-            })
+            }
         }
     }
 });

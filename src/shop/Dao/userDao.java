@@ -58,9 +58,20 @@ public class userDao {
     public void updatePwd(String email, String newpwd) {
         try {
             String sql = "update user set password=? where email=?;";
-            qr.update(sql, new md5().createMD5(newpwd), email);
+            qr.update(sql, md5.createMD5(newpwd), email);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean registerUser(String name, String email, int sex, String phone, String address, String info, String pwd) {
+        try {
+            String sql = "insert into user (name, email, sex, status, time, password, phone, address, info) values (?, ?, ?, 1, now(), ?, ?, ?, ?);";
+            qr.update(sql, name, email, sex, md5.createMD5(pwd), phone, address, info);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
