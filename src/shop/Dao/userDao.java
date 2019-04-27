@@ -74,4 +74,13 @@ public class userDao {
         }
         return false;
     }
+
+    public void updateStatus(String email) {
+        try {
+            String sql = "update user set status=2 where email=?;";
+            qr.update(sql, email);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
