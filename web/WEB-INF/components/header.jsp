@@ -45,7 +45,7 @@
             </li>
         </ul>
         <span class="form-inline my-2 my-lg-0" id="search">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchString">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchString" v-on:keyup.enter="dosearch">
             <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="dosearch">Search</button>
         </span>
     </div>

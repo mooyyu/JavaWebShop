@@ -14,7 +14,7 @@ public class userCenterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (new CookieDaoServlet().checkLogin(request)) {
+        if (new CookieDaoServlet().checkLogined(request)) {
             request.getRequestDispatcher("/WEB-INF/shop/userCenter.jsp").forward(request, response);
         } else {
             response.sendRedirect("/login.jsp");

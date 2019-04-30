@@ -3,7 +3,15 @@ package shop.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * md5加密
+ */
 public class md5 {
+    /**
+     * 创建给定字符串对应的加密后的字符串
+     * @param str
+     * @return
+     */
     public static String createMD5(String str){
         str = str + "mooyyu's md5";
 

@@ -7,7 +7,16 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import java.io.IOException;
 
+/**
+ * 发送邮件
+ */
 public class sendEmail {
+    /**
+     * 用于用户注册后，发送验证邮件
+     * @param email
+     * @param check_str
+     * @return
+     */
     static public boolean checkRegister(String email, String check_str) {
         String content =
                 "<!doctype html>\n" +

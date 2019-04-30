@@ -10,8 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 对于Cookie的操作池
+ */
 @WebServlet(name = "CookieDaoServlet")
 public class CookieDaoServlet extends HttpServlet {
+    /**
+     * 通过key返回cookie的value
+     * @param request
+     * @param key
+     * @return
+     */
     public String getValueByKey(HttpServletRequest request, String key) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -24,7 +33,12 @@ public class CookieDaoServlet extends HttpServlet {
         return null;
     }
 
-    public boolean checkLogin(HttpServletRequest request) {
+    /**
+     * 通过cookie中保存的邮件地址和加密密码验证用户是否已经登录。
+     * @param request
+     * @return
+     */
+    public boolean checkLogined(HttpServletRequest request) {
         String email = getValueByKey(request, "logined_email");
         String checkStr = getValueByKey(request, "check_str");
 
@@ -36,6 +50,13 @@ public class CookieDaoServlet extends HttpServlet {
         return false;
     }
 
+    /**
+     * 在当前request中添加cookie
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxAge
+     */
     public void addCookie(HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxAge) {
         Cookie cookie = new Cookie(cookieName, cookieValue);
         cookie.setMaxAge(cookieMaxAge);
@@ -43,6 +64,11 @@ public class CookieDaoServlet extends HttpServlet {
         response.addCookie(cookie);
     }
 
+    /**
+     * 清空当前request的所有cookie
+     * @param request
+     * @param response
+     */
     public void clearCookie(HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -55,6 +81,12 @@ public class CookieDaoServlet extends HttpServlet {
         }
     }
 
+    /**
+     * 更新cookie中保存的用户名和性别
+     * @param response
+     * @param name
+     * @param sex
+     */
     public void updateNameAndSex(HttpServletResponse response, String name, String sex) {
         Cookie cookie = new Cookie("userName", name);
         cookie.setMaxAge(-1);

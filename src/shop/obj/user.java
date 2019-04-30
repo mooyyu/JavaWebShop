@@ -1,5 +1,8 @@
 package shop.obj;
 
+/**
+ * 映射到数据库user表的记录
+ */
 public class user {
     private String name;
     private String email;

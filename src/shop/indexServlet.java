@@ -20,21 +20,19 @@ import shop.Dao.BookItemDao;
 public class indexServlet extends HttpServlet {
     private List<BookItem> list = null;
 
+    // todo: 接收参数，显示不同页面
     @Override
-    public void init() throws ServletException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+
         BookItemDao dao = new BookItemDao();
         try {
             list = dao.findAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html");
-        response.setCharacterEncoding("UTF-8");
 
         if (list != null) {
             request.setAttribute("showTitle", "分类 默认测试用 下的图书");

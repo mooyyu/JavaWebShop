@@ -1,5 +1,8 @@
 package shop.obj;
 
+/**
+ * 映射到数据库book表的记录
+ */
 public class BookItem {
     private int rownum;
     private String name;

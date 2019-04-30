@@ -10,9 +10,17 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import java.sql.SQLException;
 
+/**
+ * 对数据库中user表进行操作
+ */
 public class userDao {
     private QueryRunner qr = new TxQueryRunner();
 
+    /**
+     * 通过email字段获取用户对象
+     * @param email
+     * @return
+     */
     public user getUser(String email) {
         user u = new user();
         try {
@@ -26,6 +34,11 @@ public class userDao {
         return u;
     }
 
+    /**
+     * 通过email字段获取用户昵称
+     * @param email
+     * @return
+     */
     public String getUserName(String email) {
         try {
             String sql = String.format("select name from user where email = '%s' limit 1;", email);
@@ -36,6 +49,11 @@ public class userDao {
         return "Error";
     }
 
+    /**
+     * 通过email字段获取用户性别
+     * @param email
+     * @return
+     */
     public String getUserSex(String email) {
         try {
             String sql = String.format("select sex from user where email = '%s' limit 1;", email);
@@ -46,6 +64,15 @@ public class userDao {
         return "0";
     }
 
+    /**
+     * 更新email字段对应记录
+     * @param name
+     * @param email
+     * @param sex
+     * @param phone
+     * @param address
+     * @param info
+     */
     public void updateUser(String name, String email, int sex, String phone, String address, String info) {
         try {
             String sql = "update user set name=?, sex=?, phone=?, address=?, info=? where email=?;";
@@ -55,6 +82,11 @@ public class userDao {
         }
     }
 
+    /**
+     * 更新email字段对应的密码
+     * @param email
+     * @param newpwd 未加密的密码
+     */
     public void updatePwd(String email, String newpwd) {
         try {
             String sql = "update user set password=? where email=?;";
@@ -64,6 +96,17 @@ public class userDao {
         }
     }
 
+    /**
+     * 用户注册，增加一条用户记录
+     * @param name
+     * @param email
+     * @param sex
+     * @param phone
+     * @param address
+     * @param info
+     * @param pwd
+     * @return
+     */
     public boolean registerUser(String name, String email, int sex, String phone, String address, String info, String pwd) {
         try {
             String sql = "insert into user (name, email, sex, status, time, password, phone, address, info) values (?, ?, ?, 1, now(), ?, ?, ?, ?);";
@@ -75,6 +118,10 @@ public class userDao {
         return false;
     }
 
+    /**
+     * 更新email字段对应的用户状态
+     * @param email
+     */
     public void updateStatus(String email) {
         try {
             String sql = "update user set status=2 where email=?;";
