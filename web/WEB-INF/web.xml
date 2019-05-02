@@ -109,4 +109,13 @@
         <servlet-name>checkRegisterServlet</servlet-name>
         <url-pattern>/shop/checkRegisterServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>showBookItemServlet</servlet-name>
+        <servlet-class>shop.showBookItemServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>showBookItemServlet</servlet-name>
+        <url-pattern>/shop/showBookItemServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

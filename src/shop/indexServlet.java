@@ -27,12 +27,7 @@ public class indexServlet extends HttpServlet {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
 
-        BookItemDao dao = new BookItemDao();
-        try {
-            list = dao.findAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        list = new BookItemDao().findAll();
 
         if (list != null) {
             request.setAttribute("showTitle", "分类 默认测试用 下的图书");

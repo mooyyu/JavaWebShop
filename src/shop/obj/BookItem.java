@@ -5,10 +5,13 @@ package shop.obj;
  */
 public class BookItem {
     private int rownum;
+    private String uuid;
     private String name;
     private String author;
+    private String info;
     private int hownew;
     private int price;
+    private int catagoryId;
     private String image_b;
     private String image_w;
 
@@ -16,10 +19,13 @@ public class BookItem {
     public String toString() {
         return "BookItem{" +
                 "rownum=" + rownum +
+                ", uuid='" + uuid + '\'' +
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
+                ", info='" + info + '\'' +
                 ", hownew=" + hownew +
                 ", price=" + price +
+                ", catagoryId=" + catagoryId +
                 ", image_b='" + image_b + '\'' +
                 ", image_w='" + image_w + '\'' +
                 '}';
@@ -31,6 +37,14 @@ public class BookItem {
 
     public void setRownum(int rownum) {
         this.rownum = rownum;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {
@@ -49,6 +63,14 @@ public class BookItem {
         this.author = author;
     }
 
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
     public int getHownew() {
         return hownew;
     }
@@ -63,6 +85,14 @@ public class BookItem {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getCatagoryId() {
+        return catagoryId;
+    }
+
+    public void setCatagoryId(int catagoryId) {
+        this.catagoryId = catagoryId;
     }
 
     public String getImage_b() {

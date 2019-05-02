@@ -50,7 +50,7 @@
         <div class="container-fluid">
           <c:forEach var="item" items="${itemlist}">
             <div class="card float-left m-1 d-none" style="width: 12rem;" id="${item.rownum}" >
-              <img class="card-img-top" src="/resource/${item.image_b}" alt="Card image cap">
+              <img uuid="${item.uuid}" v-on:click="showItem" class="card-img-top" src="/resource/${item.image_b}" alt="Card image cap">
               <div class="card-body">
                 <p class="card-text text-nowrap text-truncate">${item.name}</p>
                 <ul class="list-group list-group-flush text-nowrap text-truncate">
@@ -64,11 +64,11 @@
         </div>
 
         <div class="container float-left">
-          <jsp:include page="../components/pagination.jsp"></jsp:include>
+          <jsp:include page="../components/pagination.jsp?v=1.0"></jsp:include>
         </div>
       </div>
 
-      <script src="/resource/function/pagination.js?v=1.9"></script>
+      <script src="/resource/function/pagination.js?v=1.2"></script>
 
       <jsp:include page="../components/right_side.jsp"></jsp:include>
     </div>

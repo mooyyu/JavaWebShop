@@ -90,6 +90,9 @@ var app = new Vue({
             app.link_3 = curpage;
             app.link_4 = curpage + 1;
             app.link_5 = curpage + 2;
+        },
+        showItem: function(e) {
+            window.location.href = '/shop/showBookItemServlet?uuid=' + e.target.getAttribute("uuid");
         }
     }
 });

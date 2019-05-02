@@ -1,7 +1,9 @@
 package shop.Dao;
 
 import cn.itcast.jdbc.TxQueryRunner;
+import cn.itcast.jdbc.JdbcUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import shop.obj.BookItem;
 
@@ -17,23 +19,41 @@ public class BookItemDao {
     /**
      * 查找bookItem中所有数据
      * @return
-     * @throws SQLException
      */
-    public List<BookItem> findAll() throws SQLException {
-        String sql = "select @rownum:=@rownum+1 as rownum, name, author, hownew, price, image_b, image_w from book" +
+    public List<BookItem> findAll() {
+        String sql = "select @rownum:=@rownum+1 as rownum, uuid, name, author, hownew, price, image_b, image_w from book" +
                 ", (select @rownum:=0) t;";
-        return qr.query(sql, new BeanListHandler<BookItem>(BookItem.class));
+        try {
+            return qr.query(sql, new BeanListHandler<BookItem>(BookItem.class));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
      * 查找和搜索相关的数据，将字符串和书名，作者名匹配。
      * @param searchStr
      * @return
-     * @throws SQLException
      */
-    public List<BookItem> search(String searchStr) throws SQLException {
+    public List<BookItem> search(String searchStr) {
         String sql = String.format("select @rownum:=@rownum+1 as rownum, name, author, hownew, price, image_b, image_w from book" +
                 ", (select @rownum:=0) t where name like '%%%s%%' or author like '%%%s%%';", searchStr, searchStr);
-        return qr.query(sql, new BeanListHandler<BookItem>(BookItem.class));
+        try {
+            return qr.query(sql, new BeanListHandler<BookItem>(BookItem.class));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public BookItem showItem(String uuid) {
+        String sql = String.format("select name, author, hownew, price, catagoryId, image_w, info from book where uuid = '%s';", uuid);
+        try {
+            return qr.query(sql, new BeanHandler<BookItem>(BookItem.class));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

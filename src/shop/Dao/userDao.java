@@ -6,6 +6,7 @@ import shop.obj.user;
 import shop.utils.md5;
 
 import cn.itcast.jdbc.TxQueryRunner;
+import cn.itcast.jdbc.JdbcUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import java.sql.SQLException;
@@ -75,9 +76,19 @@ public class userDao {
      */
     public void updateUser(String name, String email, int sex, String phone, String address, String info) {
         try {
+            JdbcUtils.beginTransaction();
+
             String sql = "update user set name=?, sex=?, phone=?, address=?, info=? where email=?;";
             qr.update(sql, name, sex, phone, address, info, email);
+            JdbcUtils.commitTransaction();
+
+            JdbcUtils.commitTransaction();
         } catch (SQLException e) {
+            try {
+                JdbcUtils.rollbackTransaction();
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            }
             e.printStackTrace();
         }
     }

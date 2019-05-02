@@ -24,12 +24,7 @@ public class searchServlet extends HttpServlet {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         if (searchStr != null) {
-            BookItemDao dao = new BookItemDao();
-            try {
-                list = dao.search(searchStr);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            list = new BookItemDao().search(searchStr);
             request.setAttribute("showTitle", String.format("搜索 %s 的结果", searchStr));
             request.setAttribute("itemlist", list);
             request.getRequestDispatcher("/WEB-INF/shop/showIndex.jsp").forward(request, response);
