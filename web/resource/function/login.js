@@ -2,22 +2,29 @@ var loginapp = new Vue({
     el: "div#login",
     data: {
         email: "",
-        password: ""
+        password: "",
+        loginAlert: ""
     },
     methods: {
         submit: function() {
-            axios.post('/shop/checkLoginServlet?method=login', {
-                email: loginapp.email,
-                password: loginapp.password
-            }).then(function(res) {
-                if (res.data == "yes") {
-                    window.location.href = "/";
-                } else {
-                    $('div#loginalert').modal('show');
-                }
-            }).catch(function(error) {
-                console.info(error);
-            });
+            if (loginapp.email != "" && loginapp.password != "") {
+                axios.post('/shop/checkLoginServlet?method=login', {
+                    email: loginapp.email,
+                    password: loginapp.password
+                }).then(function(res) {
+                    if (res.data == "yes") {
+                        window.location.href = "/";
+                    } else {
+                        loginapp.loginAlert = "邮箱或密码错误！";
+                        $('div#loginalert').modal('show');
+                    }
+                }).catch(function(error) {
+                    console.info(error);
+                });
+            } else {
+                loginapp.loginAlert = "请将信息填写完整！";
+                $('div#loginalert').modal('show');
+            }
         }
     }
 });

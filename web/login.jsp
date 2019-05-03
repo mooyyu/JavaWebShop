@@ -61,7 +61,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    邮箱或密码错误！
+                    {{loginAlert}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -164,6 +164,6 @@
 
 <jsp:include page="./WEB-INF/components/footer.jsp"></jsp:include>
 
-<script src="resource/function/login.js?v=1.5"></script>
+<script src="resource/function/login.js?v=1.6"></script>
 </body>
 </html>

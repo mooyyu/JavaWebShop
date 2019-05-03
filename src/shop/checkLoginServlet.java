@@ -105,7 +105,7 @@ public class checkLoginServlet extends HttpServlet {
 
         JSONObject loginInfo = new JSONObject(sb.toString());
         userDao con = new userDao();
-        if (new connectDao().checkLogin(loginInfo.getString("email"), loginInfo.getString("password"))) {
+        if (loginInfo.getString("email") != "" && loginInfo.getString("password") != "" && new connectDao().checkLogin(loginInfo.getString("email"), loginInfo.getString("password"))) {
             CookieDaoServlet cookieDao = new CookieDaoServlet();
 
             cookieDao.addCookie(response, "logined_email", loginInfo.getString("email"), -1);

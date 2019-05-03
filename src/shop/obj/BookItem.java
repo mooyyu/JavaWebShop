@@ -11,8 +11,7 @@ public class BookItem {
     private String info;
     private int hownew;
     private int price;
-    private String image_b;
-    private String image_w;
+    private String image;
     private int catagoryId;
     private int userId;
     private catagory catagory;
@@ -28,8 +27,7 @@ public class BookItem {
                 ", info='" + info + '\'' +
                 ", hownew=" + hownew +
                 ", price=" + price +
-                ", image_b='" + image_b + '\'' +
-                ", image_w='" + image_w + '\'' +
+                ", image_b='" + image + '\'' +
                 ", catagoryId=" + catagoryId +
                 ", userId=" + userId +
                 ", catagory=" + catagory.toString() +
@@ -93,20 +91,12 @@ public class BookItem {
         this.price = price;
     }
 
-    public String getImage_b() {
-        return image_b;
+    public String getImage() {
+        return image;
     }
 
-    public void setImage_b(String image_b) {
-        this.image_b = image_b;
-    }
-
-    public String getImage_w() {
-        return image_w;
-    }
-
-    public void setImage_w(String image_w) {
-        this.image_w = image_w;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getCatagoryId() {

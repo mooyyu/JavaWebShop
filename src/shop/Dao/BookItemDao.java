@@ -22,7 +22,7 @@ public class BookItemDao {
      * @return
      */
     public List<BookItem> findNew(int limit) {
-        String sql = String.format("select @rownum:=@rownum+1 as rownum, uuid, name, author, hownew, price, image_b, image_w from book" +
+        String sql = String.format("select @rownum:=@rownum+1 as rownum, uuid, name, author, hownew, price, image from book" +
                 ", (select @rownum:=0) t order by time desc limit 0, %d;", limit);
         try {
             return qr.query(sql, new BeanListHandler<BookItem>(BookItem.class));
@@ -38,7 +38,7 @@ public class BookItemDao {
      * @return
      */
     public List<BookItem> findAllinCatagory(int catagoryId) {
-        String sql = String.format("select @rownum:=@rownum+1 as rownum, uuid, name, author, hownew, price, image_b, image_w from book" +
+        String sql = String.format("select @rownum:=@rownum+1 as rownum, uuid, name, author, hownew, price, image from book" +
                 ", (select @rownum:=0) t where catagoryId=%d;", catagoryId);
         try {
             return qr.query(sql, new BeanListHandler<BookItem>(BookItem.class));
@@ -54,7 +54,7 @@ public class BookItemDao {
      * @return
      */
     public List<BookItem> search(String searchStr) {
-        String sql = String.format("select @rownum:=@rownum+1 as rownum, name, author, hownew, price, image_b, image_w from book" +
+        String sql = String.format("select @rownum:=@rownum+1 as rownum, name, author, hownew, price, image from book" +
                 ", (select @rownum:=0) t where name like '%%%s%%' or author like '%%%s%%';", searchStr, searchStr);
         try {
             return qr.query(sql, new BeanListHandler<BookItem>(BookItem.class));
@@ -70,7 +70,7 @@ public class BookItemDao {
      * @return
      */
     public BookItem showItem(String uuid) {
-        String sql = String.format("select name, author, hownew, price, userId, catagoryId, image_w, info from book where uuid = '%s';", uuid);
+        String sql = String.format("select name, author, hownew, price, userId, catagoryId, image, info from book where uuid = '%s';", uuid);
         try {
             BookItem book = qr.query(sql, new BeanHandler<BookItem>(BookItem.class));
             book.setUser(new userDao().getUserById(book.getUserId()));

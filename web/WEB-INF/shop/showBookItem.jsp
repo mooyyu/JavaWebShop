@@ -36,7 +36,7 @@
     <p class="badge">分类: <span class="badge badge-pill badge-info">${item.catagory.name}</span></p>
     <div class="row">
         <div class="col-3">
-            <img class="rounded w-100 my-3" src="/resource/book_img/${item.image_w}">
+            <img class="rounded w-100 my-3" src="/resource/book_img/${item.image}">
             <div class="w-100">
                 <button type="button" class="btn btn-outline-primary d-block m-auto">☆</button>
             </div>
