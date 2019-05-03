@@ -1,11 +1,15 @@
 var searchapp = new Vue({
     el: "span#search",
     data: {
-        searchString: "Search"
+        searchString: ""
     },
     methods: {
         dosearch: function() {
-            window.location.href = "/shop/searchServlet?searchString=" + searchapp.searchString;
+            if (searchapp.searchString == "") {
+                $('div#searchalert').modal('show');
+            } else {
+                window.location.href = "/shop/searchServlet?searchString=" + searchapp.searchString;
+            }
         }
     }
 })

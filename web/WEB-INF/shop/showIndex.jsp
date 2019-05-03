@@ -50,7 +50,7 @@
         <div class="container-fluid">
           <c:forEach var="item" items="${itemlist}">
             <div class="card float-left m-1 d-none" style="width: 12rem;" id="${item.rownum}" >
-              <img uuid="${item.uuid}" v-on:click="showItem" class="card-img-top" src="/resource/${item.image_b}" alt="Card image cap">
+              <img uuid="${item.uuid}" v-on:click="showItem" class="card-img-top" src="/resource/book_img/${item.image_b}" alt="Card image cap">
               <div class="card-body">
                 <p class="card-text text-nowrap text-truncate">${item.name}</p>
                 <ul class="list-group list-group-flush text-nowrap text-truncate">

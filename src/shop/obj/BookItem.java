@@ -11,9 +11,12 @@ public class BookItem {
     private String info;
     private int hownew;
     private int price;
-    private int catagoryId;
     private String image_b;
     private String image_w;
+    private int catagoryId;
+    private int userId;
+    private catagory catagory;
+    private user user;
 
     @Override
     public String toString() {
@@ -25,9 +28,12 @@ public class BookItem {
                 ", info='" + info + '\'' +
                 ", hownew=" + hownew +
                 ", price=" + price +
-                ", catagoryId=" + catagoryId +
                 ", image_b='" + image_b + '\'' +
                 ", image_w='" + image_w + '\'' +
+                ", catagoryId=" + catagoryId +
+                ", userId=" + userId +
+                ", catagory=" + catagory.toString() +
+                ", user=" + user.toString() +
                 '}';
     }
 
@@ -87,14 +93,6 @@ public class BookItem {
         this.price = price;
     }
 
-    public int getCatagoryId() {
-        return catagoryId;
-    }
-
-    public void setCatagoryId(int catagoryId) {
-        this.catagoryId = catagoryId;
-    }
-
     public String getImage_b() {
         return image_b;
     }
@@ -109,5 +107,37 @@ public class BookItem {
 
     public void setImage_w(String image_w) {
         this.image_w = image_w;
+    }
+
+    public int getCatagoryId() {
+        return catagoryId;
+    }
+
+    public void setCatagoryId(int catagoryId) {
+        this.catagoryId = catagoryId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public shop.obj.catagory getCatagory() {
+        return catagory;
+    }
+
+    public void setCatagory(shop.obj.catagory catagory) {
+        this.catagory = catagory;
+    }
+
+    public shop.obj.user getUser() {
+        return user;
+    }
+
+    public void setUser(shop.obj.user user) {
+        this.user = user;
     }
 }

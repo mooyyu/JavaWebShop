@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="col-1" id="right_side">
-    <div class="container-fluid bg-dark py-4">
+    <div class="container-fluid py-4 border">
         <button type="button" class="btn btn-primary my-2 d-block">这</button>
         <button type="button" class="btn btn-primary my-2 d-block">是</button>
         <button type="button" class="btn btn-primary my-2 d-block">一</button>

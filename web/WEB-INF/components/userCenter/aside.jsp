@@ -9,6 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script>
+    var curPage = "userCenter";
     var curItem = "${param.aside}";
 </script>
 
@@ -28,4 +29,4 @@
     </div>
 </div>
 
-<script src="/resource/function/asideCurActive.js?v=1.0"></script>
+<script src="/resource/function/asideCurActive.js?v=1.4"></script>

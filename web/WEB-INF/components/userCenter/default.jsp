@@ -10,8 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:set var="email" value="${cookie.logined_email.value}"></c:set>
-<% user u = new userDao().getUser((String)pageContext.getAttribute("email")); %>
-<c:set var="user" value="<%=u%>"></c:set>
+<c:set var="user" value="<%=new userDao().getUser((String)pageContext.getAttribute("email"))%>"></c:set>
 
 <script>
     var user_name = "${user.name}";

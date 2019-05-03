@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
+import shop.Dao.catagoryDao;
 import shop.obj.BookItem;
 import shop.Dao.BookItemDao;
 
@@ -20,22 +21,22 @@ import shop.Dao.BookItemDao;
 public class indexServlet extends HttpServlet {
     private List<BookItem> list = null;
 
-    // todo: 接收参数，显示不同页面
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
 
-        list = new BookItemDao().findAll();
-
-        if (list != null) {
-            request.setAttribute("showTitle", "分类 默认测试用 下的图书");
-            request.setAttribute("itemlist", list);
-            request.getRequestDispatcher("/WEB-INF/shop/showIndex.jsp").forward(request, response);
+        String cataId = request.getParameter("cataId");
+        if (cataId == null) {
+            list = new BookItemDao().findNew(300);
+            request.setAttribute("showTitle", "最新的图书");
         } else {
-            PrintWriter writer = response.getWriter();
-            writer.println("Error");
+            list = new BookItemDao().findAllinCatagory(Integer.valueOf(cataId));
+            request.setAttribute("showTitle", String.format("分类 %s 下的图书", new catagoryDao().getName(Integer.valueOf(cataId))));
         }
+
+        request.setAttribute("itemlist", list);
+        request.getRequestDispatcher("/WEB-INF/shop/showIndex.jsp").forward(request, response);
     }
 }

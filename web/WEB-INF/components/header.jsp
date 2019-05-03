@@ -45,10 +45,30 @@
             </li>
         </ul>
         <span class="form-inline my-2 my-lg-0" id="search">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchString" v-on:keyup.enter="dosearch">
+            <input maxlength="10" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchString" v-on:keyup.enter="dosearch">
             <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="dosearch">Search</button>
         </span>
     </div>
 </nav>
 
-<script src="/resource/function/search.js?v=1.4"></script>
+<!-- Modal -->
+<div class="modal fade" id="searchalert" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">搜索</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                请输入搜索内容！
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/resource/function/search.js?v=1.6"></script>
