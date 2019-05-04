@@ -18,7 +18,7 @@
 
     <title></title>
 </head>
-<body style="min-height: 100vh; position: relative;">
+<body style="min-height: 100vh; min-width: 1100px; position: relative;">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="/resource/js/jquery.min.js"></script>

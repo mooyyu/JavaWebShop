@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<nav aria-label="...">
+<nav id="paginationBar" aria-label="...">
     <ul class="pagination justify-content-center">
         <li v-bind:class="prev_page">
                 <span class="page-link" aria-label="Previous" v-on:click="prevpage">

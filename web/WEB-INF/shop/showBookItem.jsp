@@ -18,7 +18,7 @@
 
     <title></title>
 </head>
-<body style="min-height: 100vh; position: relative;">
+<body style="min-height: 100vh; min-width: 1100px; position: relative;">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="/resource/js/jquery.min.js"></script>
@@ -33,6 +33,7 @@
 <jsp:include page="../components/header.jsp"></jsp:include>
 
 <script>
+    var curPage = "showBookItem";
     var isLogin = ${empty cookie.isLogin ? false : cookie.isLogin.value};
     if (isLogin) { var logined_email = "${cookie.logined_email.value}"; var check_str = "${cookie.check_str.value}"; var userId = "${cookie.userId.value}"; }
     var collectStatus = ${collectStatus};
@@ -88,7 +89,7 @@
     </div>
 </div>
 
-<script src="/resource/function/collect.js?v=1.3"></script>
+<script src="/resource/function/collect.js?v=1.4"></script>
 
 <jsp:include page="../components/footer.jsp"></jsp:include>
 </body>

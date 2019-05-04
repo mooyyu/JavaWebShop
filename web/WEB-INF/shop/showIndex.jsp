@@ -19,7 +19,7 @@
     
     <title>分享商城</title>
   </head>
-  <body style="min-height: 100vh; position: relative;">
+  <body style="min-height: 100vh; min-width: 1100px; position: relative;">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="/resource/js/jquery.min.js"></script>
@@ -68,7 +68,7 @@
         </div>
       </div>
 
-      <script src="/resource/function/pagination.js?v=1.2"></script>
+      <script src="/resource/function/pagination.js?v=1.4"></script>
 
       <jsp:include page="../components/right_side.jsp"></jsp:include>
     </div>

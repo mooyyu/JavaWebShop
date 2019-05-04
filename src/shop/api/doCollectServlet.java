@@ -21,6 +21,8 @@ public class doCollectServlet extends HttpServlet {
         BufferedReader br = request.getReader();
         StringBuilder sb = new StringBuilder("");
 
+        String method = request.getParameter("method");
+
         String str;
         while ((str = br.readLine()) != null) {
             sb.append(str);
@@ -31,9 +33,17 @@ public class doCollectServlet extends HttpServlet {
 
         JSONObject json = new JSONObject(sb.toString());
 
-        if (json.has("logined_email") && json.has("check_str") && json.has("uuid") && json.has("userId")) {
-            if (new connectDao().checkLogined(json.getString("logined_email"), json.getString("check_str")) && json.getString("userId").equals(new userDao().getUserId(json.getString("logined_email")))) {
-                response.getWriter().println(new collectDao().toggleStatus(Integer.valueOf(json.getString("userId")), json.getString("uuid")));
+        if (json.has("logined_email") && json.has("check_str") && json.has("userId") && (json.has("uuid") || method.equals("clearAll"))) {
+            if (method != null && new connectDao().checkLogined(json.getString("logined_email"), json.getString("check_str")) && json.getString("userId").equals(new userDao().getUserId(json.getString("logined_email")))) {
+                if (method.equals("toggleCollect")) {
+                    response.getWriter().println(new collectDao().toggleStatus(Integer.valueOf(json.getString("userId")), json.getString("uuid")));
+                } else if (method.equals("clearCollect")) {
+                    new collectDao().clear(Integer.valueOf(json.getString("userId")), json.getString("uuid"));
+                } else if (method.equals("clearAll")) {
+                    new collectDao().clearAll(Integer.valueOf(json.getString("userId")));
+                } else {
+                    response.getWriter().println(-1);
+                }
             } else {
                 response.getWriter().println(-1);
             }
