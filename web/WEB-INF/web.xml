@@ -118,4 +118,13 @@
         <servlet-name>showBookItemServlet</servlet-name>
         <url-pattern>/shop/showBookItemServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>doCollectServlet</servlet-name>
+        <servlet-class>shop.api.doCollectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>doCollectServlet</servlet-name>
+        <url-pattern>/shop/api/doCollectServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -48,16 +48,17 @@ public class checkLoginServlet extends HttpServlet {
 
         JSONObject registerInfo = new JSONObject(sb.toString());
 
-        String name = registerInfo.getString("name");
-        String email = registerInfo.getString("email");
-        String phone = registerInfo.getString("phone");
-        String sex = registerInfo.getString("sex");
-        String address = registerInfo.getString("address");
-        String info = registerInfo.getString("info");
-        String pwd = registerInfo.getString("pwd");
-        String confirmPwd = registerInfo.getString("confirmPwd");
+        if (registerInfo.has("name") && registerInfo.has("email") && registerInfo.has("phone") && registerInfo.has("sex") && registerInfo.has("address") && registerInfo.has("info") && registerInfo.has("pwd") && registerInfo.has("confirmPwd")) {
+            String name = registerInfo.getString("name");
+            String email = registerInfo.getString("email");
+            String phone = registerInfo.getString("phone");
+            String sex = registerInfo.getString("sex");
+            String address = registerInfo.getString("address");
+            String info = registerInfo.getString("info");
+            String pwd = registerInfo.getString("pwd");
+            String confirmPwd = registerInfo.getString("confirmPwd");
 
-        if (name != null && email != null && phone != null && sex != null && address != null && info != null && pwd != null && confirmPwd != null) {
+
             if (name != "" && email != "" && sex != "" && pwd != "" && confirmPwd != "") {
                 if (pwd.equals(confirmPwd)) {
                     connectDao con = new connectDao();
@@ -105,7 +106,7 @@ public class checkLoginServlet extends HttpServlet {
 
         JSONObject loginInfo = new JSONObject(sb.toString());
         userDao con = new userDao();
-        if (loginInfo.getString("email") != "" && loginInfo.getString("password") != "" && new connectDao().checkLogin(loginInfo.getString("email"), loginInfo.getString("password"))) {
+        if (loginInfo.has("email") && loginInfo.has("password") && new connectDao().checkLogin(loginInfo.getString("email"), loginInfo.getString("password"))) {
             CookieDaoServlet cookieDao = new CookieDaoServlet();
 
             cookieDao.addCookie(response, "logined_email", loginInfo.getString("email"), -1);
@@ -113,6 +114,7 @@ public class checkLoginServlet extends HttpServlet {
             cookieDao.addCookie(response, "isLogin", "true", -1);
             cookieDao.addCookie(response, "userName", con.getUserName(loginInfo.getString("email")), -1);
             cookieDao.addCookie(response, "userSex", con.getUserSex(loginInfo.getString("email")), -1);
+            cookieDao.addCookie(response, "userId", con.getUserId(loginInfo.getString("email")), -1);
 
             writer.print("yes");
         } else {

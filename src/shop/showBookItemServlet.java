@@ -1,6 +1,8 @@
 package shop;
 
 import shop.Dao.BookItemDao;
+import shop.Dao.CookieDaoServlet;
+import shop.Dao.collectDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +19,15 @@ public class showBookItemServlet extends HttpServlet {
         String uuid = request.getParameter("uuid");
         if (uuid != null) {
             request.setAttribute("item", new BookItemDao().showItem(uuid));
+            CookieDaoServlet cookieDao = new CookieDaoServlet();
+            if (cookieDao.getValueByKey(request, "isLogin") != null && cookieDao.getValueByKey(request, "userId") != null) {
+                request.setAttribute("collectStatus", new collectDao().getStatus(Integer.valueOf(cookieDao.getValueByKey(request, "userId")), uuid));
+            } else {
+                request.setAttribute("collectStatus", false);
+            }
+            request.getRequestDispatcher("/WEB-INF/shop/showBookItem.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("/");
         }
-        request.getRequestDispatcher("/WEB-INF/shop/showBookItem.jsp").forward(request, response);
     }
 }

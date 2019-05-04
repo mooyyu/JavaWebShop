@@ -10,14 +10,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:set var="email" value="${cookie.logined_email.value}"></c:set>
-<c:set var="user" value="<%=new userDao().getUser((String)pageContext.getAttribute("email"))%>"></c:set>
+<c:set var="user" value='<%=(new userDao().getUser((String)pageContext.getAttribute("email")))%>'></c:set>
 
 <script>
     var user_name = "${user.name}";
     var user_sex = "${user.sex}";
     var user_phone = "${user.phone}";
     var user_email = "${user.email}";
-    var check_str = "${cookie.check_str.value}";
+    var cookie_logined_email = "${cookie.logined_email.value}";
+    var cookie_check_str = "${cookie.check_str.value}";
 </script>
 
 <div class="alert alert-info" role="alert">我的内容</div>
@@ -125,4 +126,4 @@
     </div>
 </div>
 
-<script src="/resource/function/updateUserAndPwd.js"></script>
+<script src="/resource/function/updateUserAndPwd.js?v=1.0"></script>

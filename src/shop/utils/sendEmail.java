@@ -217,7 +217,7 @@ public class sendEmail {
                         "                  <tr>\n" +
                         "                    <td align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n" +
                         "                      <div style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:center;color:#555555;\">\n" +
-                        "                        <h2><a href=\"http://shop/localhost:8080/checkRegisterServlet?email=" + email + "&check_str=" + check_str + "\">点击此处验证</a></h2>\n" +
+                        "                        <h2><a href=\"http://localhost:8080/shop/checkRegisterServlet?email=" + email + "&check_str=" + check_str + "\">点击此处验证</a></h2>\n" +
                         "                      </div>\n" +
                         "                    </td>\n" +
                         "                  </tr>\n" +

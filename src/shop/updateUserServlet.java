@@ -29,17 +29,21 @@ public class updateUserServlet extends HttpServlet {
         br.close();
 
         JSONObject user = new JSONObject(sb.toString());
-        if (new connectDao().checkLogined(user.getString("email"), user.getString("check_str"))) {
-            new userDao().updateUser(
-                    user.getString("name"),
-                    user.getString("email"),
-                    Integer.valueOf(user.getString("sex")),
-                    user.getString("phone"),
-                    user.getString("address"),
-                    user.getString("info"));
-            new CookieDaoServlet().updateNameAndSex(response, user.getString("name"), user.getString("sex"));
+        if (user.has("email") && user.has("check_str") && user.has("name") && user.has("sex") && user.has("phone") && user.has("address") && user.has("info")) {
+            if (new connectDao().checkLogined(user.getString("email"), user.getString("check_str"))) {
+                new userDao().updateUser(
+                        user.getString("name"),
+                        user.getString("email"),
+                        Integer.valueOf(user.getString("sex")),
+                        user.getString("phone"),
+                        user.getString("address"),
+                        user.getString("info"));
+                new CookieDaoServlet().updateNameAndSex(response, user.getString("name"), user.getString("sex"));
 
-            response.getWriter().print("yes");
+                response.getWriter().print("yes");
+            } else {
+                response.getWriter().print("no");
+            }
         } else {
             response.getWriter().print("no");
         }

@@ -29,11 +29,15 @@ public class updatePwdServlet extends HttpServlet {
         br.close();
 
         JSONObject pwd = new JSONObject(sb.toString());
-        if (new connectDao().checkLogined(pwd.getString("email"), pwd.getString("check_str"))) {
-            if (new connectDao().checkLogin(pwd.getString("email"), pwd.getString("oldpwd"))) {
-                if (pwd.getString("newpwd").equals(pwd.getString("confirmpwd"))) {
-                    new userDao().updatePwd(pwd.getString("email"), pwd.getString("newpwd"));
-                    response.getWriter().print("yes");
+        if (pwd.has("email") && pwd.has("check_str") && pwd.has("oldpwd") && pwd.has("newpwd") && pwd.has("confirmpwd")) {
+            if (new connectDao().checkLogined(pwd.getString("email"), pwd.getString("check_str"))) {
+                if (new connectDao().checkLogin(pwd.getString("email"), pwd.getString("oldpwd"))) {
+                    if (pwd.getString("newpwd").equals(pwd.getString("confirmpwd"))) {
+                        new userDao().updatePwd(pwd.getString("email"), pwd.getString("newpwd"));
+                        response.getWriter().print("yes");
+                    } else {
+                        response.getWriter().print("no");
+                    }
                 } else {
                     response.getWriter().print("no");
                 }

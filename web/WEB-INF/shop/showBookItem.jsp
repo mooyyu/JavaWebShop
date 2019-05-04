@@ -32,13 +32,40 @@
 
 <jsp:include page="../components/header.jsp"></jsp:include>
 
+<script>
+    var isLogin = ${empty cookie.isLogin ? false : cookie.isLogin.value};
+    if (isLogin) { var logined_email = "${cookie.logined_email.value}"; var check_str = "${cookie.check_str.value}"; var userId = "${cookie.userId.value}"; }
+    var collectStatus = ${collectStatus};
+    var uuid = "${param.uuid}";
+</script>
+
 <div class="container" style="max-width: 900px;">
     <p class="badge">分类: <span class="badge badge-pill badge-info">${item.catagory.name}</span></p>
     <div class="row">
-        <div class="col-3">
+        <div id="collect" class="col-3">
             <img class="rounded w-100 my-3" src="/resource/book_img/${item.image}">
             <div class="w-100">
-                <button type="button" class="btn btn-outline-primary d-block m-auto">☆</button>
+                <button v-on:click="doCollect" type="button" class="btn btn-outline-primary d-block m-auto">{{curStatus}}</button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="collectAlert" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">收藏</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{collectAns}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-1"></div>
@@ -60,6 +87,8 @@
         </div>
     </div>
 </div>
+
+<script src="/resource/function/collect.js?v=1.3"></script>
 
 <jsp:include page="../components/footer.jsp"></jsp:include>
 </body>

@@ -71,12 +71,27 @@ public class userDao {
      */
     public String getUserSex(String email) {
         try {
-            String sql = String.format("select sex from user where email = '%s' limit 1;", email);
+            String sql = String.format("select sex from user where email = '%s';", email);
             return ((Number)qr.query(sql, new ScalarHandler())).toString();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "0";
+        return null;
+    }
+
+    /**
+     * 通过email字段获取用户id
+     * @param email
+     * @return
+     */
+    public String getUserId(String email) {
+        try {
+            String sql = String.format("select id from user where email = '%s';", email);
+            return ((Number)qr.query(sql, new ScalarHandler())).toString();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -94,7 +109,6 @@ public class userDao {
 
             String sql = "update user set name=?, sex=?, phone=?, address=?, info=? where email=?;";
             qr.update(sql, name, sex, phone, address, info, email);
-            JdbcUtils.commitTransaction();
 
             JdbcUtils.commitTransaction();
         } catch (SQLException e) {
@@ -114,9 +128,18 @@ public class userDao {
      */
     public void updatePwd(String email, String newpwd) {
         try {
+            JdbcUtils.beginTransaction();
+
             String sql = "update user set password=? where email=?;";
             qr.update(sql, md5.createMD5(newpwd), email);
+
+            JdbcUtils.commitTransaction();
         } catch (SQLException e) {
+            try {
+                JdbcUtils.rollbackTransaction();
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            }
             e.printStackTrace();
         }
     }
@@ -134,10 +157,19 @@ public class userDao {
      */
     public boolean registerUser(String name, String email, int sex, String phone, String address, String info, String pwd) {
         try {
+            JdbcUtils.beginTransaction();
+
             String sql = "insert into user (name, email, sex, status, time, password, phone, address, info) values (?, ?, ?, 1, now(), ?, ?, ?, ?);";
             qr.update(sql, name, email, sex, md5.createMD5(pwd), phone, address, info);
+
+            JdbcUtils.commitTransaction();
             return true;
         } catch (SQLException e) {
+            try {
+                JdbcUtils.rollbackTransaction();
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            }
             e.printStackTrace();
         }
         return false;
@@ -149,9 +181,18 @@ public class userDao {
      */
     public void updateStatus(String email) {
         try {
+            JdbcUtils.beginTransaction();
+
             String sql = "update user set status=2 where email=?;";
             qr.update(sql, email);
+
+            JdbcUtils.commitTransaction();
         } catch (SQLException e) {
+            try {
+                JdbcUtils.rollbackTransaction();
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            }
             e.printStackTrace();
         }
     }

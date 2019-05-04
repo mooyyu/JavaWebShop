@@ -50,8 +50,8 @@ var updatePwdApp = new Vue({
                 $('div#updatePwdAns').modal('show');
             } else {
                 axios.post('/shop/updatePwdServlet', {
-                    email: "${cookie.logined_email.value}",
-                    check_str: "${cookie.check_str.value}",
+                    email: cookie_logined_email,
+                    check_str: cookie_check_str,
                     oldpwd: updatePwdApp.oldpwd,
                     newpwd: updatePwdApp.newpwd,
                     confirmpwd: updatePwdApp.confirmpwd
