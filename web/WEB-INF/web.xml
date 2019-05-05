@@ -120,11 +120,29 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>editBookItemServlet</servlet-name>
+        <servlet-class>shop.editBookItemServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>editBookItemServlet</servlet-name>
+        <url-pattern>/shop/editBookItemServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>doCollectServlet</servlet-name>
-        <servlet-class>shop.api.doCollectServlet</servlet-class>
+        <servlet-class>shop.doCollectServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>doCollectServlet</servlet-name>
-        <url-pattern>/shop/api/doCollectServlet</url-pattern>
+        <url-pattern>/shop/doCollectServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>updateBookItemServlet</servlet-name>
+        <servlet-class>shop.updateBookItemServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateBookItemServlet</servlet-name>
+        <url-pattern>/shop/updateBookItemServlet</url-pattern>
     </servlet-mapping>
 </web-app>

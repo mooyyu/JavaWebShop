@@ -8,7 +8,7 @@ if (curPage == "showBookItem") {
         methods: {
             doCollect: function() {
                 if (isLogin) {
-                    axios.post('/shop/api/doCollectServlet?method=toggleCollect', {
+                    axios.post('/shop/doCollectServlet?method=toggleCollect', {
                         logined_email: logined_email,
                         check_str: check_str,
                         uuid: uuid,
@@ -38,7 +38,7 @@ if (curPage == "showBookItem") {
     collectapp.curStatus = collectStatus ? "★" : "☆";
 } else if (curPage == "userCollect") {
     var clearCollect = function(e) {
-        axios.post('/shop/api/doCollectServlet?method=clearCollect', {
+        axios.post('/shop/doCollectServlet?method=clearCollect', {
             logined_email: logined_email,
             check_str: check_str,
             uuid: e.target.getAttribute("uuid"),
@@ -51,7 +51,7 @@ if (curPage == "showBookItem") {
     };
     var clearAll = function() {
         if (itemlistsize != 0) {
-            axios.post('/shop/api/doCollectServlet?method=clearAll', {
+            axios.post('/shop/doCollectServlet?method=clearAll', {
                 logined_email: logined_email,
                 check_str: check_str,
                 userId: userId

@@ -23,6 +23,16 @@ public class catagoryDao {
         return null;
     }
 
+    public boolean hasId(int id) {
+        String sql = String.format("select count(1) from catagory where id=%d", id);
+        try {
+            return ((Number)qr.query(sql, new ScalarHandler())).intValue() == 1 ? true : false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public catagory get(int id) {
         String sql = String.format("select id, name from catagory where id = %d", id);
         try {

@@ -9,8 +9,8 @@ var updateUserApp = new Vue({
         submit: function() {
             axios.post('/shop/updateUserServlet', {
                 name: updateUserApp.name,
-                email: user_email,
-                check_str: check_str,
+                email: cookie_logined_email,
+                check_str: cookie_check_str,
                 sex: updateUserApp.sex,
                 phone: updateUserApp.phone,
                 address: $("textarea#address")[0].value,

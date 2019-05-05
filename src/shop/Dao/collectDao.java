@@ -109,6 +109,7 @@ public class collectDao {
         }
     }
 
+    // todo: 收藏失效问题可以使用通知
     /**
      * 返回该用户收藏夹内所有书目的简单信息
      * @param userId
@@ -116,7 +117,7 @@ public class collectDao {
      */
     public List<BookItem> getList(int userId) {
         String sql = String.format("select @rownum:=@rownum+1 as rownum, uuid, name, price, image from book" +
-                ", (select @rownum:=0) t where uuid in (select bookId from collect where userId=%d);", userId);
+                ", (select @rownum:=0) t where status=1 and uuid in (select bookId from collect where userId=%d);", userId);
         try {
             return qr.query(sql, new BeanListHandler<BookItem>(BookItem.class));
         } catch (SQLException e) {

@@ -5,6 +5,7 @@ import cn.itcast.jdbc.JdbcUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import shop.obj.BookItem;
 import shop.Dao.userDao;
 import shop.Dao.catagoryDao;
@@ -23,7 +24,7 @@ public class BookItemDao {
      */
     public List<BookItem> findNew(int limit) {
         String sql = String.format("select @rownum:=@rownum+1 as rownum, uuid, name, author, hownew, price, image from book" +
-                ", (select @rownum:=0) t order by time desc limit 0, %d;", limit);
+                ", (select @rownum:=0) t where status=1 order by time desc limit 0, %d;", limit);
         try {
             return qr.query(sql, new BeanListHandler<BookItem>(BookItem.class));
         } catch (SQLException e) {
@@ -39,7 +40,23 @@ public class BookItemDao {
      */
     public List<BookItem> findAllinCatagory(int catagoryId) {
         String sql = String.format("select @rownum:=@rownum+1 as rownum, uuid, name, author, hownew, price, image from book" +
-                ", (select @rownum:=0) t where catagoryId=%d;", catagoryId);
+                ", (select @rownum:=0) t where status=1 and catagoryId=%d;", catagoryId);
+        try {
+            return qr.query(sql, new BeanListHandler<BookItem>(BookItem.class));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 返回该用户发布的所有书目
+     * @param userId
+     * @return
+     */
+    public List<BookItem> findAllfromUserId(int userId) {
+        String sql = String.format("select @rownum:=@rownum+1 as rownum, uuid, name, price, image from book" +
+                ", (select @rownum:=0) t where status=1 and userId=%d;", userId);
         try {
             return qr.query(sql, new BeanListHandler<BookItem>(BookItem.class));
         } catch (SQLException e) {
@@ -54,8 +71,8 @@ public class BookItemDao {
      * @return
      */
     public List<BookItem> search(String searchStr) {
-        String sql = String.format("select @rownum:=@rownum+1 as rownum, name, author, hownew, price, image from book" +
-                ", (select @rownum:=0) t where name like '%%%s%%' or author like '%%%s%%';", searchStr, searchStr);
+        String sql = String.format("select @rownum:=@rownum+1 as rownum, uuid, name, author, hownew, price, image from book" +
+                ", (select @rownum:=0) t where status=1 and (name like '%%%s%%' or author like '%%%s%%');", searchStr, searchStr);
         try {
             return qr.query(sql, new BeanListHandler<BookItem>(BookItem.class));
         } catch (SQLException e) {
@@ -64,13 +81,23 @@ public class BookItemDao {
         return null;
     }
 
+    public boolean checkUuid(String uuid) {
+        String sql = String.format("select count(1) from book where uuid='%s' and status=1;", uuid);
+        try {
+            return ((Number)qr.query(sql, new ScalarHandler())).intValue() == 1 ? true : false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     /**
      * 根据uuid查找对应的bookitem的基本信息
      * @param uuid
      * @return
      */
     public BookItem showItem(String uuid) {
-        String sql = String.format("select name, author, hownew, price, userId, catagoryId, image, info from book where uuid = '%s';", uuid);
+        String sql = String.format("select name, author, hownew, price, userId, catagoryId, image, info from book where status=1 and uuid = '%s';", uuid);
         try {
             BookItem book = qr.query(sql, new BeanHandler<BookItem>(BookItem.class));
             book.setUser(new userDao().getUserById(book.getUserId()));
@@ -80,5 +107,26 @@ public class BookItemDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void updateItem(String uuid, int catagoryId, String name, String author, int hownew, int price, String info) {
+        if (new catagoryDao().hasId(catagoryId)) {
+            String sql = String.format("update book set name='%s', author='%s', catagoryId=%d, hownew=%d, price=%d, info='%s' where uuid='%s' and status=1;"
+                    , name, author, catagoryId, hownew, price, info, uuid);
+            try {
+                JdbcUtils.beginTransaction();
+
+                qr.update(sql);
+
+                JdbcUtils.commitTransaction();
+            } catch (SQLException e) {
+                try {
+                    JdbcUtils.rollbackTransaction();
+                } catch (SQLException sqle) {
+                    sqle.printStackTrace();
+                }
+                e.printStackTrace();
+            }
+        }
     }
 }

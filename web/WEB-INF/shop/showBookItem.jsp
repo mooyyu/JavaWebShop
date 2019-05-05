@@ -41,7 +41,7 @@
 </script>
 
 <div class="container" style="max-width: 900px;">
-    <p class="badge">分类: <span class="badge badge-pill badge-info">${item.catagory.name}</span></p>
+    <p class="badge">分类: <a href="/?cataId=${item.catagoryId}" class="badge badge-pill badge-info">${item.catagory.name}</a></p>
     <div class="row">
         <div id="collect" class="col-3">
             <img class="rounded w-100 my-3" src="/resource/book_img/${item.image}">

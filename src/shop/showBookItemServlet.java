@@ -17,7 +17,7 @@ public class showBookItemServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String uuid = request.getParameter("uuid");
-        if (uuid != null) {
+        if (uuid != null && new BookItemDao().checkUuid(uuid)) {
             request.setAttribute("item", new BookItemDao().showItem(uuid));
             CookieDaoServlet cookieDao = new CookieDaoServlet();
             if (cookieDao.getValueByKey(request, "isLogin") != null && cookieDao.getValueByKey(request, "userId") != null) {

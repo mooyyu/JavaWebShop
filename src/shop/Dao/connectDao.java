@@ -26,7 +26,7 @@ public class connectDao {
         try {
             String sql = String.format("select status from user where email = '%s' limit 1;", email);
             Number num = (Number)qr.query(sql, new ScalarHandler());
-            if (num.intValue() == 2) {
+            if (num != null && num.intValue() == 2) {
                 return true;
             }
         } catch (SQLException e) {
@@ -64,7 +64,7 @@ public class connectDao {
             if (checkStatus(email)) {
                 String sql = String.format("select password from user where email = '%s' limit 1;", email);
                 String pwd = (String)qr.query(sql, new ScalarHandler());
-                if (pwd.equals(md5.createMD5(password))) {
+                if (pwd != null && pwd.equals(md5.createMD5(password))) {
                     return true;
                 }
             }
@@ -84,7 +84,7 @@ public class connectDao {
         try {
             String sql = String.format("select password from user where email = '%s' limit 1;", email);
             String pwd = (String)qr.query(sql, new ScalarHandler());
-            if (pwd.equals(checkStr)) {
+            if (pwd != null && pwd.equals(checkStr)) {
                 return true;
             }
         } catch (SQLException e) {

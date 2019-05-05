@@ -1,4 +1,4 @@
-package shop.api;
+package shop;
 
 import org.json.JSONObject;
 import shop.Dao.collectDao;

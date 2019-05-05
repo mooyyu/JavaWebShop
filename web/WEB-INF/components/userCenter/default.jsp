@@ -126,4 +126,4 @@
     </div>
 </div>
 
-<script src="/resource/function/updateUserAndPwd.js?v=1.0"></script>
+<script src="/resource/function/updateUserAndPwd.js?v=1.1"></script>

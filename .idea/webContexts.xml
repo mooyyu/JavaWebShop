@@ -18,6 +18,7 @@
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/order.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/standings.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/shop/checkRegister.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/shop" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/shop/editBookItem.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/shop" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/shop/showBookItem.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/shop" />
         <entry key="file://$PROJECT_DIR$/web/index.jsp" value="file://$PROJECT_DIR$/web" />
         <entry key="file://$PROJECT_DIR$/web/login.jsp" value="file://$PROJECT_DIR$/web" />
