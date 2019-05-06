@@ -1,6 +1,7 @@
 package shop;
 
 import org.json.JSONObject;
+import shop.Dao.CookieDaoServlet;
 import shop.Dao.connectDao;
 import shop.Dao.userDao;
 
@@ -29,11 +30,12 @@ public class updatePwdServlet extends HttpServlet {
         br.close();
 
         JSONObject pwd = new JSONObject(sb.toString());
-        if (pwd.has("email") && pwd.has("check_str") && pwd.has("oldpwd") && pwd.has("newpwd") && pwd.has("confirmpwd")) {
-            if (new connectDao().checkLogined(pwd.getString("email"), pwd.getString("check_str"))) {
-                if (new connectDao().checkLogin(pwd.getString("email"), pwd.getString("oldpwd"))) {
+        if (pwd.has("oldpwd") && pwd.has("newpwd") && pwd.has("confirmpwd")) {
+            if (new CookieDaoServlet().checkLogined(request)) {
+                String logined_email = new CookieDaoServlet().getValueByKey(request, "logined_email");
+                if (new connectDao().checkLogin(logined_email, pwd.getString("oldpwd"))) {
                     if (pwd.getString("newpwd").equals(pwd.getString("confirmpwd"))) {
-                        new userDao().updatePwd(pwd.getString("email"), pwd.getString("newpwd"));
+                        new userDao().updatePwd(logined_email, pwd.getString("newpwd"));
                         response.getWriter().print("yes");
                     } else {
                         response.getWriter().print("no");

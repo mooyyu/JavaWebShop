@@ -1,8 +1,8 @@
 package shop;
 
 import org.json.JSONObject;
+import shop.Dao.CookieDaoServlet;
 import shop.Dao.collectDao;
-import shop.Dao.connectDao;
 import shop.Dao.userDao;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,24 +31,28 @@ public class doCollectServlet extends HttpServlet {
 
         response.setContentType("text/html");
 
-        JSONObject json = new JSONObject(sb.toString());
+        if (new CookieDaoServlet().checkLogined(request)) {
+            String userId = new CookieDaoServlet().getValueByKey(request, "userId");
 
-        if (json.has("logined_email") && json.has("check_str") && json.has("userId") && (json.has("uuid") || method.equals("clearAll"))) {
-            if (method != null && new connectDao().checkLogined(json.getString("logined_email"), json.getString("check_str")) && json.getString("userId").equals(new userDao().getUserId(json.getString("logined_email")))) {
-                if (method.equals("toggleCollect")) {
-                    response.getWriter().println(new collectDao().toggleStatus(Integer.valueOf(json.getString("userId")), json.getString("uuid")));
-                } else if (method.equals("clearCollect")) {
-                    new collectDao().clear(Integer.valueOf(json.getString("userId")), json.getString("uuid"));
-                } else if (method.equals("clearAll")) {
-                    new collectDao().clearAll(Integer.valueOf(json.getString("userId")));
+            if (method.equals("clearAll")) {
+                new collectDao().clearAll(Integer.valueOf(userId));
+            } else {
+                JSONObject json = new JSONObject(sb.toString());
+
+                if (json != null && json.has("uuid")) {
+                    String uuid = json.getString("uuid");
+
+                    if (method.equals("toggleCollect")) {
+                        response.getWriter().println(new collectDao().toggleStatus(Integer.valueOf(userId), uuid));
+                    } else if (method.equals("clearCollect")) {
+                        new collectDao().clear(Integer.valueOf(userId), uuid);
+                    }
                 } else {
                     response.getWriter().println(-1);
                 }
-            } else {
-                response.getWriter().println(-1);
             }
         } else {
-            response.getWriter().println("Error.");
+            response.getWriter().println(-1);
         }
     }
 }

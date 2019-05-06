@@ -20,7 +20,6 @@ public class bookIMGServlet extends HttpServlet {
             throws ServletException, IOException {
         String method = request.getParameter("method");
         if (new CookieDaoServlet().checkLogined(request) && method != null) {
-            // todo: axios是可以携带cookie的，可以简化一大波代码！！！！！
             if (method.equals("update")) {
                 update(request, response);
             } else if (method.equals("create")) {

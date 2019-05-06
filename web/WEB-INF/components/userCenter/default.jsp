@@ -17,8 +17,6 @@
     var user_sex = "${user.sex}";
     var user_phone = "${user.phone}";
     var user_email = "${user.email}";
-    var cookie_logined_email = "${cookie.logined_email.value}";
-    var cookie_check_str = "${cookie.check_str.value}";
 </script>
 
 <div class="alert alert-info" role="alert">我的内容</div>
@@ -126,4 +124,4 @@
     </div>
 </div>
 
-<script src="/resource/function/updateUserAndPwd.js?v=1.1"></script>
+<script src="/resource/function/updateUserAndPwd.js?v=1.2"></script>

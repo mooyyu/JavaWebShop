@@ -9,8 +9,6 @@ var updateUserApp = new Vue({
         submit: function() {
             axios.post('/shop/updateUserServlet', {
                 name: updateUserApp.name,
-                email: cookie_logined_email,
-                check_str: cookie_check_str,
                 sex: updateUserApp.sex,
                 phone: updateUserApp.phone,
                 address: $("textarea#address")[0].value,
@@ -50,8 +48,6 @@ var updatePwdApp = new Vue({
                 $('div#updatePwdAns').modal('show');
             } else {
                 axios.post('/shop/updatePwdServlet', {
-                    email: cookie_logined_email,
-                    check_str: cookie_check_str,
                     oldpwd: updatePwdApp.oldpwd,
                     newpwd: updatePwdApp.newpwd,
                     confirmpwd: updatePwdApp.confirmpwd

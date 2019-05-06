@@ -9,10 +9,7 @@ if (curPage == "showBookItem") {
             doCollect: function() {
                 if (isLogin) {
                     axios.post('/shop/doCollectServlet?method=toggleCollect', {
-                        logined_email: logined_email,
-                        check_str: check_str,
-                        uuid: uuid,
-                        userId: userId
+                        uuid: uuid
                     }).then(function(res) {
                         if (res.data == -1) {
                             collectapp.collectAns = "操作失败！";
@@ -39,11 +36,8 @@ if (curPage == "showBookItem") {
 } else if (curPage == "userCollect") {
     var clearCollect = function(e) {
         axios.post('/shop/doCollectServlet?method=clearCollect', {
-            logined_email: logined_email,
-            check_str: check_str,
-            uuid: e.target.getAttribute("uuid"),
-            userId: userId
-        }).then(function(res) {
+            uuid: e.target.getAttribute("uuid")
+        }).then(function() {
             window.location.reload();
         }).catch(function(error) {
             console.info(error);
@@ -51,11 +45,8 @@ if (curPage == "showBookItem") {
     };
     var clearAll = function() {
         if (itemlistsize != 0) {
-            axios.post('/shop/doCollectServlet?method=clearAll', {
-                logined_email: logined_email,
-                check_str: check_str,
-                userId: userId
-            }).then(function(res) {
+            axios.post('/shop/doCollectServlet?method=clearAll')
+            .then(function() {
                 window.location.reload();
             }).catch(function(error) {
                 console.info(error);

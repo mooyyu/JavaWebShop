@@ -39,12 +39,13 @@ public class CookieDaoServlet extends HttpServlet {
      * @return
      */
     public boolean checkLogined(HttpServletRequest request) {
+        String isLogin = getValueByKey(request, "isLogin");
         String email = getValueByKey(request, "logined_email");
         String checkStr = getValueByKey(request, "check_str");
         String userId = getValueByKey(request, "userId");
 
-        if (email != null && checkStr != null && userId != null) {
-            if (new connectDao().checkLogined(email, checkStr) && userId.equals(new userDao().getUserId(email))) {
+        if (isLogin != null && email != null && checkStr != null && userId != null) {
+            if (isLogin.equals("true") && new connectDao().checkLogined(email, checkStr) && userId.equals(new userDao().getUserId(email))) {
                 return true;
             }
         }

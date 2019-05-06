@@ -2,6 +2,7 @@ package shop;
 
 import org.json.JSONObject;
 import shop.Dao.BookItemDao;
+import shop.Dao.CookieDaoServlet;
 import shop.Dao.connectDao;
 
 import javax.servlet.ServletException;
@@ -27,8 +28,8 @@ public class updateBookItemServlet extends HttpServlet {
         br.close();
 
         JSONObject book = new JSONObject(sb.toString());
-        if (book.has("logined_email") && book.has("check_str") && book.has("uuid") && book.has("catagoryId") && book.has("name") && book.has("author") && book.has("hownew") && book.has("price") && book.has("info")) {
-            if (new connectDao().checkLogined(book.getString("logined_email"), book.getString("check_str"))) {
+        if (book.has("uuid") && book.has("catagoryId") && book.has("name") && book.has("author") && book.has("hownew") && book.has("price") && book.has("info")) {
+            if (new CookieDaoServlet().checkLogined(request)) {
                 new BookItemDao().updateItem(
                         book.getString("uuid"),
                         Integer.valueOf(book.getString("catagoryId")),

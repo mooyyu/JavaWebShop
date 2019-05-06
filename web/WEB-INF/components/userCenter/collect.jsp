@@ -15,9 +15,6 @@
 <script>
     var curPage = "userCollect";
     var itemlistsize = ${collectList.size()};
-    var logined_email = "${cookie.logined_email.value}";
-    var check_str = "${cookie.check_str.value}";
-    var userId = "${cookie.userId.value}";
 </script>
 
 <div class="alert alert-info row" role="alert">

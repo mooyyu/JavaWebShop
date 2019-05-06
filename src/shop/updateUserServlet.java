@@ -29,11 +29,11 @@ public class updateUserServlet extends HttpServlet {
         br.close();
 
         JSONObject user = new JSONObject(sb.toString());
-        if (user.has("email") && user.has("check_str") && user.has("name") && user.has("sex") && user.has("phone") && user.has("address") && user.has("info")) {
-            if (new connectDao().checkLogined(user.getString("email"), user.getString("check_str"))) {
+        if (user.has("name") && user.has("sex") && user.has("phone") && user.has("address") && user.has("info")) {
+            if (new CookieDaoServlet().checkLogined(request)) {
                 new userDao().updateUser(
                         user.getString("name"),
-                        user.getString("email"),
+                        new CookieDaoServlet().getValueByKey(request, "logined_email"),
                         Integer.valueOf(user.getString("sex")),
                         user.getString("phone"),
                         user.getString("address"),

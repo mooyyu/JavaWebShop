@@ -34,8 +34,6 @@
 
 <script>
     var uuid = "${param.uuid}";
-    var cookie_logined_email = "${cookie.logined_email.value}";
-    var cookie_check_str = "${cookie.check_str.value}";
     var book_name = "${item.name}";
     var book_catagoryId = "${item.catagoryId}";
     var book_author = "${item.author}";
@@ -134,7 +132,7 @@
     </div>
 </div>
 
-<script src="/resource/function/editBookItem.js?v=1.2"></script>
+<script src="/resource/function/editBookItem.js?v=1.3"></script>
 <script src="/resource/function/uploadIMG.js?v=1.0"></script>
 
 <jsp:include page="../components/footer.jsp"></jsp:include>
