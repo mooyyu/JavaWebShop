@@ -87,7 +87,10 @@ public class userDao {
     public String getUserId(String email) {
         try {
             String sql = String.format("select id from user where email = '%s';", email);
-            return ((Number)qr.query(sql, new ScalarHandler())).toString();
+            Number num = (Number)qr.query(sql, new ScalarHandler());
+            if (num != null) {
+                return num.toString();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

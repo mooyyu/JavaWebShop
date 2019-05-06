@@ -40,8 +40,7 @@
     var book_catagoryId = "${item.catagoryId}";
     var book_author = "${item.author}";
     var book_hownew = "${item.hownew}";
-    var book_price = "${item.price}"
-    // todo: price输入
+    var book_price = "${item.price}";
 </script>
 
 <div id="editBookItem" class="container" style="max-width: 900px;">
@@ -58,9 +57,32 @@
 
     <div class="row">
         <div class="col-3">
-            <img class="rounded w-100 my-3" src="/resource/book_img/${item.image}">
+            <img id="bookIMG" class="rounded w-100 my-3" src="/book_img/${item.image}">
+            <div class="custom-file">
+                <label class="custom-file-label" for="inputGroupIMG" style="font-size: 12px;">350*350;128k</label>
+                <input type="file" onchange="checkIMG(this)" accept="image/jpg" class="custom-file-input" id="inputGroupIMG">
+            </div>
+            <hr>
             <div class="w-100">
-                <button type="button" class="btn btn-outline-warning d-block m-auto">修改图片</button>
+                <button class="btn btn-outline-success d-block mx-auto" type="button" onclick="submitIMG()">更新图片</button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imgModalLabel">更新图片</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div id="imgModalBody" class="modal-body"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-1"></div>
@@ -113,6 +135,7 @@
 </div>
 
 <script src="/resource/function/editBookItem.js?v=1.2"></script>
+<script src="/resource/function/uploadIMG.js?v=1.0"></script>
 
 <jsp:include page="../components/footer.jsp"></jsp:include>
 </body>

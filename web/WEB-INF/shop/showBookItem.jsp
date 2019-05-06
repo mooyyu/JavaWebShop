@@ -44,7 +44,7 @@
     <p class="badge">分类: <a href="/?cataId=${item.catagoryId}" class="badge badge-pill badge-info">${item.catagory.name}</a></p>
     <div class="row">
         <div id="collect" class="col-3">
-            <img class="rounded w-100 my-3" src="/resource/book_img/${item.image}">
+            <img class="rounded w-100 my-3" src="/book_img/${item.image}">
             <div class="w-100">
                 <button v-on:click="doCollect" type="button" class="btn btn-outline-primary d-block m-auto">{{curStatus}}</button>
             </div>

@@ -129,4 +129,42 @@ public class BookItemDao {
             }
         }
     }
+
+    public String getIMGUrl(String uuid) {
+        String sql = String.format("select image from book where uuid='%s';", uuid);
+        try {
+            return (String)qr.query(sql, new ScalarHandler());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void updateIMGUrl(String uuid, String newUrl) {
+        String sql = String.format("update book set image='%s' where uuid='%s';", newUrl, uuid);
+        try {
+            JdbcUtils.beginTransaction();
+
+            qr.update(sql);
+
+            JdbcUtils.commitTransaction();
+        } catch (SQLException e) {
+            try {
+                JdbcUtils.rollbackTransaction();
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    public String getUserId(String uuid) {
+        String sql = String.format("select userId from book where uuid='%s';", uuid);
+        try {
+            return (String)qr.query(sql, new ScalarHandler());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

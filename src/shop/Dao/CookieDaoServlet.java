@@ -34,16 +34,17 @@ public class CookieDaoServlet extends HttpServlet {
     }
 
     /**
-     * 通过cookie中保存的邮件地址和加密密码验证用户是否已经登录。
+     * 通过cookie中保存的邮件地址和加密密码和userId验证用户是否已经登录。
      * @param request
      * @return
      */
     public boolean checkLogined(HttpServletRequest request) {
         String email = getValueByKey(request, "logined_email");
         String checkStr = getValueByKey(request, "check_str");
+        String userId = getValueByKey(request, "userId");
 
-        if (email != null && checkStr != null) {
-            if (new connectDao().checkLogined(email, checkStr)) {
+        if (email != null && checkStr != null && userId != null) {
+            if (new connectDao().checkLogined(email, checkStr) && userId.equals(new userDao().getUserId(email))) {
                 return true;
             }
         }

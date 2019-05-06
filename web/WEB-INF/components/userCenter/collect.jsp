@@ -38,7 +38,7 @@
     <c:forEach var="item" items="${collectList}">
         <div id="${item.rownum}" class="row border rounded my-1 py-1 d-none" style="height: 75px;" >
             <div class="col-2" style="min-width: 80px;">
-                <img uuid="${item.uuid}" class="h-100" v-on:click="showItem" src="/resource/book_img/${item.image}">
+                <img uuid="${item.uuid}" class="h-100" v-on:click="showItem" src="/book_img/${item.image}">
             </div>
             <div class="col-10 my-auto">
                 <p class="card-text text-nowrap text-truncate h5" style="font-weight: normal;">${item.name}</p>

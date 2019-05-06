@@ -145,4 +145,13 @@
         <servlet-name>updateBookItemServlet</servlet-name>
         <url-pattern>/shop/updateBookItemServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>bookIMGServlet</servlet-name>
+        <servlet-class>shop.bookIMGServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>bookIMGServlet</servlet-name>
+        <url-pattern>/shop/bookIMGServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
