@@ -77,4 +77,4 @@
 </div>
 
 <script src="/resource/function/pagination.js?v=1.5"></script>
-<script src="/resource/function/collect.js?v=1.8"></script>
+<script src="/resource/function/collect.js?v=1.9"></script>

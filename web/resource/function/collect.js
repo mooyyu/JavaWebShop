@@ -19,6 +19,9 @@ if (curPage == "showBookItem") {
                         } else if (res.data == 1) {
                             collectapp.collectAns = "收藏成功！";
                             collectapp.curStatus = "★";
+                        } else if (res.data == 2) {
+                            collectapp.collectAns = "这是你自己的书,你收藏个啥玩意?";
+                            collectapp.curStatus = "☆";
                         }
                         $('div#collectAlert').modal('show');
                     }).catch(function(error) {

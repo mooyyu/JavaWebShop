@@ -1,9 +1,12 @@
 package shop;
 
 import org.json.JSONObject;
+import shop.Dao.BookItemDao;
 import shop.Dao.CookieDaoServlet;
 import shop.Dao.collectDao;
 import shop.Dao.userDao;
+import shop.obj.BookItem;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +46,11 @@ public class doCollectServlet extends HttpServlet {
                     String uuid = json.getString("uuid");
 
                     if (method.equals("toggleCollect")) {
-                        response.getWriter().println(new collectDao().toggleStatus(Integer.valueOf(userId), uuid));
+                        if (new BookItemDao().getUserId(uuid).equals(userId)) {
+                            response.getWriter().println(2);
+                        } else {
+                            response.getWriter().println(new collectDao().toggleStatus(Integer.valueOf(userId), uuid));
+                        }
                     } else if (method.equals("clearCollect")) {
                         new collectDao().clear(Integer.valueOf(userId), uuid);
                     }

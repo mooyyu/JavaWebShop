@@ -161,7 +161,7 @@ public class BookItemDao {
     public String getUserId(String uuid) {
         String sql = String.format("select userId from book where uuid='%s';", uuid);
         try {
-            return (String)qr.query(sql, new ScalarHandler());
+            return ((Number)qr.query(sql, new ScalarHandler())).toString();
         } catch (SQLException e) {
             e.printStackTrace();
         }
