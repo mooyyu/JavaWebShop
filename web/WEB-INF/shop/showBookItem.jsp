@@ -70,14 +70,14 @@
             </div>
         </div>
         <div class="col-1"></div>
-        <div class="col-8">
+        <div id="order" class="col-8">
             <p class="h3">${item.name}</p>
             <hr class="my-3">
             <p>作者: ${item.author}</p>
             <p>新旧程度: ${item.hownew}</p>
-            <p class="text-success">¥<text class="h3">${item.price}</text></p>
-            <button type="button" class="btn btn-outline-warning">积分兑换</button>
-            <button type="button" class="btn btn-success">立即购买</button>
+            <p class="text-success h3">¥${item.price}</p>
+            <button v-on:click="exchange" type="button" class="btn btn-outline-warning">积分兑换</button>
+            <button v-on:click="buy" type="button" class="btn btn-success">立即购买</button>
             <hr class="my-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -85,11 +85,32 @@
                 </ol>
             </nav>
             <div class="text-muted" style="white-space: pre-wrap;">${item.info}</div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="orderAlert" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">订单</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{orderAns}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <script src="/resource/function/collect.js?v=1.4"></script>
+<script src="/resource/function/order.js?v=1.2"></script>
 
 <jsp:include page="../components/footer.jsp"></jsp:include>
 </body>

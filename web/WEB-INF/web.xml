@@ -154,4 +154,13 @@
         <servlet-name>bookIMGServlet</servlet-name>
         <url-pattern>/shop/bookIMGServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>doOrderServlet</servlet-name>
+        <servlet-class>shop.doOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>doOrderServlet</servlet-name>
+        <url-pattern>/shop/doOrderServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

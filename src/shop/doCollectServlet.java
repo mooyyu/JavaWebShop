@@ -34,7 +34,7 @@ public class doCollectServlet extends HttpServlet {
 
         response.setContentType("text/html");
 
-        if (new CookieDaoServlet().checkLogined(request)) {
+        if (method != null && new CookieDaoServlet().checkLogined(request)) {
             String userId = new CookieDaoServlet().getValueByKey(request, "userId");
 
             if (method.equals("clearAll")) {

@@ -10,6 +10,20 @@ public class user {
     private String phone;
     private String address;
     private String info;
+    private int balance;
+
+    @Override
+    public String toString() {
+        return "user{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", sex=" + sex +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", info='" + info + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
 
     public String getName() {
         return name;
@@ -57,5 +71,13 @@ public class user {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 }
