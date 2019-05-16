@@ -163,4 +163,13 @@
         <servlet-name>doOrderServlet</servlet-name>
         <url-pattern>/shop/doOrderServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>rechargeServlet</servlet-name>
+        <servlet-class>shop.rechargeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>rechargeServlet</servlet-name>
+        <url-pattern>/shop/rechargeServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

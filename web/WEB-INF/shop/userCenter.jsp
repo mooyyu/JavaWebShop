@@ -45,24 +45,18 @@
     </div>
     <div class="col-1"></div>
     <div class="col-8">
+        <c:set var="aside" value="${empty param.aside ? 'default' : param.aside}"></c:set>
         <c:choose>
-            <c:when test="${param.aside.equals('bookshelf')}">
-                <jsp:include page="../components/userCenter/bookshelf.jsp"></jsp:include>
-            </c:when>
-            <c:when test="${param.aside.equals('order')}">
-                <jsp:include page="../components/userCenter/order.jsp"></jsp:include>
-            </c:when>
-            <c:when test="${param.aside.equals('collect')}">
-                <jsp:include page="../components/userCenter/collect.jsp"></jsp:include>
-            </c:when>
-            <c:when test="${param.aside.equals('message')}">
-                <jsp:include page="../components/userCenter/message.jsp"></jsp:include>
-            </c:when>
-            <c:when test="${param.aside.equals('standings')}">
-                <jsp:include page="../components/userCenter/standings.jsp"></jsp:include>
-            </c:when>
-            <c:when test="${param.aside.equals('exit')}">
-                <jsp:include page="../components/userCenter/exit.jsp"></jsp:include>
+            <c:when test="${aside.equals('default') ||
+                            aside.equals('balance') ||
+                            aside.equals('bookshelf') ||
+                            aside.equals('sold') ||
+                            aside.equals('bought') ||
+                            aside.equals('collect') ||
+                            aside.equals('message') ||
+                            aside.equals('standings') ||
+                            aside.equals('exit')}">
+                <jsp:include page="../components/userCenter/${aside}.jsp"></jsp:include>
             </c:when>
             <c:otherwise>
                 <jsp:include page="../components/userCenter/default.jsp"></jsp:include>

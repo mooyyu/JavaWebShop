@@ -5,6 +5,7 @@ public class notice {
     private String time;
     private int userId;
     private String info;
+    private String type;
 
     @Override
     public String toString() {
@@ -13,6 +14,7 @@ public class notice {
                 ", time='" + time + '\'' +
                 ", userId=" + userId +
                 ", info='" + info + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 
@@ -46,5 +48,13 @@ public class notice {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

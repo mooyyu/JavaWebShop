@@ -23,9 +23,9 @@ public class userDao {
      * @return
      */
     public user getUser(String email) {
+        String sql = String.format("select name, email, sex, phone, address, info from user where email = '%s' limit 1;", email);
         try {
             if (new connectDao().checkEmail(email)) {
-                String sql = String.format("select name, email, sex, phone, address, info from user where email = '%s' limit 1;", email);
                 return qr.query(sql, new BeanHandler<user>(user.class));
             }
         } catch (SQLException e) {
@@ -40,8 +40,8 @@ public class userDao {
      * @return
      */
     public user getUserById(int id) {
+        String sql = String.format("select name, email, sex, phone, address, info from user where id = %d;", id);
         try {
-            String sql = String.format("select name, email, sex, phone, address, info from user where id = %d;", id);
             return qr.query(sql, new BeanHandler<user>(user.class));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -55,8 +55,8 @@ public class userDao {
      * @return
      */
     public String getUserName(String email) {
+        String sql = String.format("select name from user where email = '%s' limit 1;", email);
         try {
-            String sql = String.format("select name from user where email = '%s' limit 1;", email);
             return (String)qr.query(sql, new ScalarHandler());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,8 +70,8 @@ public class userDao {
      * @return
      */
     public String getUserSex(String email) {
+        String sql = String.format("select sex from user where email = '%s';", email);
         try {
-            String sql = String.format("select sex from user where email = '%s';", email);
             return ((Number)qr.query(sql, new ScalarHandler())).toString();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,8 +85,8 @@ public class userDao {
      * @return
      */
     public String getUserId(String email) {
+        String sql = String.format("select id from user where email = '%s';", email);
         try {
-            String sql = String.format("select id from user where email = '%s';", email);
             Number num = (Number)qr.query(sql, new ScalarHandler());
             if (num != null) {
                 return num.toString();
@@ -107,10 +107,10 @@ public class userDao {
      * @param info
      */
     public void updateUser(String name, String email, int sex, String phone, String address, String info) {
+        String sql = "update user set name=?, sex=?, phone=?, address=?, info=? where email=?;";
         try {
             JdbcUtils.beginTransaction();
 
-            String sql = "update user set name=?, sex=?, phone=?, address=?, info=? where email=?;";
             qr.update(sql, name, sex, phone, address, info, email);
 
             JdbcUtils.commitTransaction();
@@ -130,10 +130,10 @@ public class userDao {
      * @param newpwd 未加密的密码
      */
     public void updatePwd(String email, String newpwd) {
+        String sql = "update user set password=? where email=?;";
         try {
             JdbcUtils.beginTransaction();
 
-            String sql = "update user set password=? where email=?;";
             qr.update(sql, md5.createMD5(newpwd), email);
 
             JdbcUtils.commitTransaction();
@@ -159,10 +159,10 @@ public class userDao {
      * @return
      */
     public boolean registerUser(String name, String email, int sex, String phone, String address, String info, String pwd) {
+        String sql = "insert into user (name, email, sex, status, time, password, phone, address, info) values (?, ?, ?, 1, now(), ?, ?, ?, ?);";
         try {
             JdbcUtils.beginTransaction();
 
-            String sql = "insert into user (name, email, sex, status, time, password, phone, address, info) values (?, ?, ?, 1, now(), ?, ?, ?, ?);";
             qr.update(sql, name, email, sex, md5.createMD5(pwd), phone, address, info);
 
             JdbcUtils.commitTransaction();
@@ -183,10 +183,10 @@ public class userDao {
      * @param email
      */
     public void updateStatus(String email) {
+        String sql = "update user set status=2 where email=?;";
         try {
             JdbcUtils.beginTransaction();
 
-            String sql = "update user set status=2 where email=?;";
             qr.update(sql, email);
 
             JdbcUtils.commitTransaction();
@@ -198,5 +198,58 @@ public class userDao {
             }
             e.printStackTrace();
         }
+    }
+
+    public String getBalance(int id) {
+        String sql = "select balance from user where id=?;";
+        try {
+            Number num = (Number)qr.query(sql, new ScalarHandler(), id);
+            if (num != null) {
+                return num.toString();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void recharge(int id, int money) {
+        String sql = "update user set balance=balance+? where id=?;";
+        try {
+            JdbcUtils.beginTransaction();
+
+            qr.update(sql, money, id);
+
+            JdbcUtils.commitTransaction();
+        } catch (SQLException e) {
+            try {
+                JdbcUtils.rollbackTransaction();
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    public boolean consume(int id, int money) {
+        if (Integer.valueOf(getBalance(id)) >= money) {
+            String sql = "update user set balance=balance-? where id=?;";
+            try {
+                JdbcUtils.beginTransaction();
+
+                qr.update(sql, money, id);
+
+                JdbcUtils.commitTransaction();
+                return true;
+            } catch (SQLException e) {
+                try {
+                    JdbcUtils.rollbackTransaction();
+                } catch (SQLException sqle) {
+                    sqle.printStackTrace();
+                }
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 }

@@ -1,10 +1,7 @@
 package shop;
 
 import org.json.JSONObject;
-import shop.Dao.BookItemDao;
-import shop.Dao.CookieDaoServlet;
-import shop.Dao.noticeDao;
-import shop.Dao.orderDao;
+import shop.Dao.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,13 +34,21 @@ public class doOrderServlet extends HttpServlet {
             if (!buyerId.equals(sellerId)) {
                 if (method.equals("buy")) {
                     noticeDao no = new noticeDao();
-                    // todo: 增加账户余额部分
-                    no.createNotice(Integer.valueOf(sellerId), "您有一笔新的订单,请尽快处理.");
-                    no.createNotice(Integer.valueOf(buyerId), "您的订单已经生成,请等待卖方处理.");
-                    new orderDao().createOrder(uuid, Integer.valueOf(sellerId), Integer.valueOf(buyerId));
-                    response.getWriter().println("订单已经生成,请耐心等待卖方处理,若超过72小时未处理,系统将自动取消订单.");
+                    userDao ud = new userDao();
+                    BookItemDao bd = new BookItemDao();
+                    String moneyStr = bd.getMoney(uuid);
+                    if (moneyStr != null && ud.consume(Integer.valueOf(buyerId), Integer.valueOf(moneyStr))) {
+                        bd.updateStatus(uuid, 2);
+                        // todo: 可以添加收藏失效通知
+                        no.createNotice(Integer.valueOf(sellerId), "您有一笔新的订单,请尽快处理.", "success");
+                        no.createNotice(Integer.valueOf(buyerId), "您的订单已经生成,请等待卖方处理.", "primary");
+                        new orderDao().createOrder(uuid, Integer.valueOf(sellerId), Integer.valueOf(buyerId));
+                        response.getWriter().println("订单已经生成,请耐心等待卖方处理.");
+                    } else {
+                        response.getWriter().println("钱不够啊(´▽｀),快去充钱吧,充钱使你变强.");
+                    }
                 } else if (method.equals("exchange")) {
-                    // exchange
+                    // todo: exchange
                     response.getWriter().println("exchange" + uuid);
                 }
             } else {

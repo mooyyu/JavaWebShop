@@ -20,8 +20,10 @@
     </div>
     <div class="list-group mb-5">
         <a id="default" href="userCenterServlet" class="list-group-item list-group-item-action active disabled">我的内容</a>
+        <a id="balance" href="?aside=balance" class="list-group-item list-group-item-action">账户余额</a>
         <a id="bookshelf" href="?aside=bookshelf" class="list-group-item list-group-item-action">我的书架</a>
-        <a id="order" href="?aside=order" class="list-group-item list-group-item-action">我的订单</a>
+        <a id="sold" href="?aside=sold" class="list-group-item list-group-item-action">我卖出的</a>
+        <a id="bought" href="?aside=bought" class="list-group-item list-group-item-action">我买入的</a>
         <a id="collect" href="?aside=collect" class="list-group-item list-group-item-action">收藏阁</a>
         <a id="message" href="?aside=message" class="list-group-item list-group-item-action">消息通知</a>
         <a id="standings" href="?aside=standings" class="list-group-item list-group-item-action">积分</a>

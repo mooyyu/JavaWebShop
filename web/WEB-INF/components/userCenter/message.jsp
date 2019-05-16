@@ -30,7 +30,7 @@
 <div id="pagination" class="container">
     <c:forEach var="item" items="${notices}">
         <div id="${item.rownum}" class="rounded mb-1 d-none">
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-${item.type}" role="alert">
                 <h6 class="alert-heading text-dark">${item.time}</h6>
                 <hr>
                 <p class="mb-0">${item.info}</p>

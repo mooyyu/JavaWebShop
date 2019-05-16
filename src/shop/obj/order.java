@@ -1,5 +1,7 @@
 package shop.obj;
 
+import java.awt.print.Book;
+
 public class order {
     private String bookId;
     private int status;
@@ -7,6 +9,7 @@ public class order {
     private int buyerId;
     private user seller;
     private user buyer;
+    private BookItem book;
 
     @Override
     public String toString() {
@@ -17,6 +20,7 @@ public class order {
                 ", buyerId=" + buyerId +
                 ", seller=" + seller.toString() +
                 ", buyer=" + buyer.toString() +
+                ", book=" + book.toString() +
                 '}';
     }
 
@@ -66,5 +70,13 @@ public class order {
 
     public void setBuyer(user buyer) {
         this.buyer = buyer;
+    }
+
+    public BookItem getBook() {
+        return book;
+    }
+
+    public void setBook(BookItem book) {
+        this.book = book;
     }
 }

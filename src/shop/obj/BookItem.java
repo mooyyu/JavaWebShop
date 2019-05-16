@@ -16,6 +16,8 @@ public class BookItem {
     private int userId;
     private catagory catagory;
     private user user;
+    private int status;
+    private int orderStatus;
 
     @Override
     public String toString() {
@@ -27,11 +29,13 @@ public class BookItem {
                 ", info='" + info + '\'' +
                 ", hownew=" + hownew +
                 ", price=" + price +
-                ", image_b='" + image + '\'' +
+                ", image='" + image + '\'' +
                 ", catagoryId=" + catagoryId +
                 ", userId=" + userId +
                 ", catagory=" + catagory.toString() +
                 ", user=" + user.toString() +
+                ", status=" + status +
+                ", orderStatus=" + orderStatus +
                 '}';
     }
 
@@ -129,5 +133,21 @@ public class BookItem {
 
     public void setUser(shop.obj.user user) {
         this.user = user;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

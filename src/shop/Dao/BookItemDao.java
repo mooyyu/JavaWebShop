@@ -167,4 +167,35 @@ public class BookItemDao {
         }
         return null;
     }
+
+    public String getMoney(String uuid) {
+        String sql = "select price from book where uuid=?;";
+        try {
+            Number num =  (Number)qr.query(sql, new ScalarHandler(), uuid);
+            if (num != null) {
+                return num.toString();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void updateStatus(String uuid, int status) {
+        String sql = "update book set status=? where uuid=?;";
+        try {
+            JdbcUtils.beginTransaction();
+
+            qr.update(sql, status, uuid);
+
+            JdbcUtils.commitTransaction();
+        } catch (SQLException e) {
+            try {
+                JdbcUtils.rollbackTransaction();
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+    }
 }

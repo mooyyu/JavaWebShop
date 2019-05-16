@@ -12,6 +12,7 @@
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userAside.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/balance.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/bookshelf.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/bought.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/collect.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/default.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter/exit.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/components/userCenter" />

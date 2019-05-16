@@ -104,6 +104,8 @@ public class checkLoginServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter writer = response.getWriter();
 
+        // todo: 传参,记住登录
+
         JSONObject loginInfo = new JSONObject(sb.toString());
         userDao con = new userDao();
         if (loginInfo.has("email") && loginInfo.has("password") && new connectDao().checkLogin(loginInfo.getString("email"), loginInfo.getString("password"))) {

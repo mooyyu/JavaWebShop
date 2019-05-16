@@ -11,8 +11,6 @@ import shop.obj.collect;
 import java.sql.SQLException;
 import java.util.List;
 
-// todo: 用户不得收藏自己的书！！！
-
 public class collectDao {
     private QueryRunner qr = new TxQueryRunner();
 
