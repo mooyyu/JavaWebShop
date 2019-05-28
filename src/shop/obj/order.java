@@ -3,8 +3,9 @@ package shop.obj;
 import java.awt.print.Book;
 
 public class order {
+    private int id;
     private String bookId;
-    private int status;
+    private int status; //0:订单被取消,1:订单生成,2:运输中,3:完成交易
     private int sellerId;
     private int buyerId;
     private user seller;
@@ -14,7 +15,8 @@ public class order {
     @Override
     public String toString() {
         return "order{" +
-                "bookId='" + bookId + '\'' +
+                "id=" + id +
+                ", bookId='" + bookId + '\'' +
                 ", status=" + status +
                 ", sellerId=" + sellerId +
                 ", buyerId=" + buyerId +
@@ -22,6 +24,14 @@ public class order {
                 ", buyer=" + buyer.toString() +
                 ", book=" + book.toString() +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getBookId() {

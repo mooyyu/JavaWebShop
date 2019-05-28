@@ -14,6 +14,7 @@
 
 <script>
     var itemlistsize = ${bought.size()};
+    var curPage = "bought";
 </script>
 
 <div class="alert alert-success" role="alert">
@@ -32,17 +33,17 @@
     <c:forEach var="item" items="${bought}">
         <div id="${item.rownum}" class="row border rounded my-1 py-1 d-none" style="height: 75px;" >
             <div class="col-2" style="min-width: 80px;">
-                <img uuid="${item.uuid}" class="h-100" v-on:click="showItem" src="/book_img/${item.image}">
+                <img uuid="${item.uuid}" class="h-100" src="/book_img/${item.image}">
             </div>
             <div class="col-10 my-auto">
                 <p class="card-text text-nowrap text-truncate h5" style="font-weight: normal;"><span class="badge badge-pill badge-${statusColor[item.orderStatus]}">${statusInfo[item.orderStatus]}</span>${item.name}</p>
                 <div class="d-flex justify-content-end w-100">
                     <c:choose>
                         <c:when test="${item.orderStatus == 1}">
-                            <button type="button" class="btn btn-sm btn-outline-danger">取消</button>
+                            <button onclick="updateOrder('cancel', '${item.orderId}')" type="button" class="btn btn-sm btn-outline-danger">取消</button>
                         </c:when>
                         <c:when test="${item.orderStatus == 2}">
-                            <button type="button" class="btn btn-sm btn-outline-dark">确认收货</button>
+                            <button onclick="updateOrder('reciving', '${item.orderId}')" type="button" class="btn btn-sm btn-outline-dark">确认收货</button>
                         </c:when>
                     </c:choose>
                 </div>
@@ -56,3 +57,4 @@
 </div>
 
 <script src="/resource/function/pagination.js?v=1.5"></script>
+<script src="/resource/function/order.js?v=1.1"></script>

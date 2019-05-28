@@ -16,8 +16,9 @@ public class BookItem {
     private int userId;
     private catagory catagory;
     private user user;
-    private int status;
-    private int orderStatus;
+    private int status; //0:下架,1:正常待售,2:订单已生成,3:销售成功
+    private int orderStatus;    //0:订单被取消,1:订单生成,2:运输中,3:完成交易
+    private int orderId;
 
     @Override
     public String toString() {
@@ -36,6 +37,7 @@ public class BookItem {
                 ", user=" + user.toString() +
                 ", status=" + status +
                 ", orderStatus=" + orderStatus +
+                ", orderId=" + orderId +
                 '}';
     }
 
@@ -149,5 +151,13 @@ public class BookItem {
 
     public void setOrderStatus(int orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 }
