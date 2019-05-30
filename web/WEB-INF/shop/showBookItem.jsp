@@ -110,7 +110,7 @@
 </div>
 
 <script src="/resource/function/collect.js?v=1.4"></script>
-<script src="/resource/function/order.js?v=1.2"></script>
+<script src="/resource/function/order.js?v=1.3"></script>
 
 <jsp:include page="../components/footer.jsp"></jsp:include>
 </body>

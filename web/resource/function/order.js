@@ -6,25 +6,33 @@ if (curPage == "showBookItem") {
         },
         methods: {
             buy: function() {
-                var that = this;
-                axios.post('/shop/doOrderServlet?method=buy', {
-                    uuid: uuid
-                }).then(function(res) {
-                    that.orderAns = res.data;
-                }).catch(function(error) {
-                    console.info(error);
-                });
+                if (isLogin) {
+                    var that = this;
+                    axios.post('/shop/doOrderServlet?method=buy', {
+                        uuid: uuid
+                    }).then(function(res) {
+                        that.orderAns = res.data;
+                    }).catch(function(error) {
+                        console.info(error);
+                    });
+                } else {
+                    this.orderAns = "请登录后操作!";
+                }
                 $('div#orderAlert').modal('show');
             },
             exchange: function() {
-                var that = this;
-                axios.post('/shop/doOrderServlet?method=exchange', {
-                    uuid: uuid
-                }).then(function(res) {
-                    that.orderAns = res.data;
-                }).catch(function(error) {
-                    console.info(error);
-                });
+                if (isLogin) {
+                    var that = this;
+                    axios.post('/shop/doOrderServlet?method=exchange', {
+                        uuid: uuid
+                    }).then(function(res) {
+                        that.orderAns = res.data;
+                    }).catch(function(error) {
+                        console.info(error);
+                    });
+                } else {
+                    this.orderAns = "请登录后操作!";
+                }
                 $('div#orderAlert').modal('show');
             }
         }

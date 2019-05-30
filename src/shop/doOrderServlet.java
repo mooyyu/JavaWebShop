@@ -22,11 +22,13 @@ public class doOrderServlet extends HttpServlet {
         JSONObject json = new getPost().getPostJson(request);
         String method = request.getParameter("method");
         if (method != null && json != null && new CookieDao().checkLogined(request)) {
-            if (json.has("uuid") && method.equals("buy") || method.equals("exchange")) {
+            if (json.has("uuid") && (method.equals("buy") || method.equals("exchange"))) {
                 createOrder(request, response, method, json.getString("uuid"));
             } else if (json.has("orderId")) {
                 updateOrder(request, response, method, Integer.valueOf(json.getString("orderId")));
             }
+        } else {
+            response.getWriter().print("请登录后操作!");
         }
     }
 
