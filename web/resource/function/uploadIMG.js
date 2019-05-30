@@ -10,12 +10,12 @@ var checkIMG = function(o) {
                 var fr = new FileReader();
                 fr.onloadend = function(e) {
                     image.onload = function() {
-                        if (image.height == 350 && image.width == 350) {
+                        if (image.height <= 500 && image.width <= 350) {
                             $('img#bookIMG')[0].src = e.target.result;
                         } else {
                             $('img#bookIMG')[0].src = rawIMGsrc;
                             imgFile = null;
-                            $('div#imgModalBody')[0].innerText = "请选择尺寸为350*350的图片!";
+                            $('div#imgModalBody')[0].innerText = "请选择尺寸为小于350*500的图片!";
                             $('div#imgModal').modal('show');
                         }
                     }

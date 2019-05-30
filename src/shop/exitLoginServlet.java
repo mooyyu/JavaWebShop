@@ -1,6 +1,6 @@
 package shop;
 
-import shop.Dao.CookieDaoServlet;
+import shop.Dao.CookieDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +14,7 @@ public class exitLoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        new CookieDaoServlet().clearCookie(request, response);
+        new CookieDao().clearCookie(request, response);
         if (request.getParameter("method") != null && request.getParameter("method").equals("relogin")) {
             response.sendRedirect("/login.jsp");
         } else {

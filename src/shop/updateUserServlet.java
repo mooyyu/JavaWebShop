@@ -1,9 +1,9 @@
 package shop;
 
 import shop.Dao.userDao;
-import shop.Dao.connectDao;
 import org.json.JSONObject;
-import shop.Dao.CookieDaoServlet;
+import shop.Dao.CookieDao;
+import shop.utils.getPost;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,26 +19,17 @@ public class updateUserServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
 
-        BufferedReader br = request.getReader();
-        StringBuilder sb = new StringBuilder("");
-
-        String str;
-        while ((str = br.readLine()) != null) {
-            sb.append(str);
-        }
-        br.close();
-
-        JSONObject user = new JSONObject(sb.toString());
+        JSONObject user = new getPost().getPostJson(request);
         if (user.has("name") && user.has("sex") && user.has("phone") && user.has("address") && user.has("info")) {
-            if (new CookieDaoServlet().checkLogined(request)) {
+            if (new CookieDao().checkLogined(request)) {
                 new userDao().updateUser(
                         user.getString("name"),
-                        new CookieDaoServlet().getValueByKey(request, "logined_email"),
+                        new CookieDao().getValueByKey(request, "logined_email"),
                         Integer.valueOf(user.getString("sex")),
                         user.getString("phone"),
                         user.getString("address"),
                         user.getString("info"));
-                new CookieDaoServlet().updateNameAndSex(response, user.getString("name"), user.getString("sex"));
+                new CookieDao().updateNameAndSex(response, user.getString("name"), user.getString("sex"));
 
                 response.getWriter().print("yes");
             } else {

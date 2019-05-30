@@ -19,7 +19,7 @@
 <div class="alert alert-info row" role="alert">
     <div class="col-6 my-auto">我的书架</div>
     <div class="d-flex align-items-end col-6">
-        <button type="button" class="btn btn-lg btn-outline-success btn-sm ml-auto">新建分享</button>
+        <a href="/shop/createBookItemServlet" class="btn btn-lg btn-outline-success btn-sm ml-auto">新建分享</a>
     </div>
 </div>
 <hr>

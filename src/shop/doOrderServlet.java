@@ -2,6 +2,7 @@ package shop;
 
 import org.json.JSONObject;
 import shop.Dao.*;
+import shop.utils.getPost;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,16 +18,10 @@ public class doOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
-        BufferedReader br = request.getReader();
-        StringBuilder sb = new StringBuilder("");
-        String str;
-        while ((str = br.readLine()) != null) {
-            sb.append(str);
-        }
-        br.close();
-        JSONObject json = new JSONObject(sb.toString());
+
+        JSONObject json = new getPost().getPostJson(request);
         String method = request.getParameter("method");
-        if (method != null && json != null && new CookieDaoServlet().checkLogined(request)) {
+        if (method != null && json != null && new CookieDao().checkLogined(request)) {
             if (json.has("uuid") && method.equals("buy") || method.equals("exchange")) {
                 createOrder(request, response, method, json.getString("uuid"));
             } else if (json.has("orderId")) {
@@ -37,7 +32,7 @@ public class doOrderServlet extends HttpServlet {
 
     public void createOrder(HttpServletRequest request, HttpServletResponse response, String method, String uuid)
             throws ServletException, IOException {
-        String buyerId = new CookieDaoServlet().getValueByKey(request, "userId");
+        String buyerId = new CookieDao().getValueByKey(request, "userId");
         String sellerId = new BookItemDao().getUserId(uuid);
         if (!buyerId.equals(sellerId)) {
             if (method.equals("buy")) {
@@ -55,7 +50,7 @@ public class doOrderServlet extends HttpServlet {
                 }
             } else if (method.equals("exchange")) {
                 // todo: exchange
-                response.getWriter().println("exchange" + uuid);
+                response.getWriter().println("积分系统正在开发哟～");
             }
         } else {
             response.getWriter().println("你买自己的书干啥？不允许!");

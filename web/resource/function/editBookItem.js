@@ -9,9 +9,9 @@ var editBookItemapp = new Vue({
         submit: function() {
             axios.post('/shop/updateBookItemServlet', {
                 uuid: uuid,
-                name: editBookItemapp.name,
-                author: editBookItemapp.author,
-                price: editBookItemapp.price,
+                name: this.name,
+                author: this.author,
+                price: this.price,
                 info: $('textarea#bookInfo')[0].value,
                 catagoryId: $('select#inputGroupSelectCatagory')[0].value,
                 hownew: $('select#inputGroupSelectHownew')[0].value

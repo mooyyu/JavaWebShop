@@ -13,8 +13,8 @@ import java.io.IOException;
 /**
  * 对于Cookie的操作池
  */
-@WebServlet(name = "CookieDaoServlet")
-public class CookieDaoServlet extends HttpServlet {
+@WebServlet(name = "CookieDao")
+public class CookieDao extends HttpServlet {
     /**
      * 通过key返回cookie的value
      * @param request

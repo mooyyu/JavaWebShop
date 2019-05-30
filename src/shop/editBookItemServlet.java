@@ -1,7 +1,7 @@
 package shop;
 
 import shop.Dao.BookItemDao;
-import shop.Dao.CookieDaoServlet;
+import shop.Dao.CookieDao;
 import shop.Dao.catagoryDao;
 
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ public class editBookItemServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String uuid = request.getParameter("uuid");
-        if (new CookieDaoServlet().checkLogined(request)) {
+        if (new CookieDao().checkLogined(request)) {
             if (uuid != null && new BookItemDao().checkUuid(uuid)) {
                 request.setAttribute("item", new BookItemDao().showItem(uuid));
                 request.setAttribute("cataList", new catagoryDao().getAll());

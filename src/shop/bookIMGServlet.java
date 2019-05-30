@@ -2,7 +2,7 @@ package shop;
 
 import cn.itcast.commons.CommonUtils;
 import shop.Dao.BookItemDao;
-import shop.Dao.CookieDaoServlet;
+import shop.Dao.CookieDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -19,7 +19,7 @@ public class bookIMGServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String method = request.getParameter("method");
-        if (new CookieDaoServlet().checkLogined(request) && method != null) {
+        if (new CookieDao().checkLogined(request) && method != null) {
             if (method.equals("update")) {
                 update(request, response);
             } else if (method.equals("create")) {
@@ -47,6 +47,11 @@ public class bookIMGServlet extends HttpServlet {
 
     public void create(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String newUrl = CommonUtils.uuid() + ".jpg";
+        File oldIMG = new File("/Users/mooyyu/IdeaProjects/Shop/book_img/" + newUrl);
+        if (!oldIMG.exists()) {
+            request.getPart("img").write(newUrl);
+            response.getWriter().print(newUrl);
+        }
     }
 }

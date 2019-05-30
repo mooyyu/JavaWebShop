@@ -2,10 +2,9 @@ package shop;
 
 import org.json.JSONObject;
 import shop.Dao.BookItemDao;
-import shop.Dao.CookieDaoServlet;
+import shop.Dao.CookieDao;
 import shop.Dao.collectDao;
-import shop.Dao.userDao;
-import shop.obj.BookItem;
+import shop.utils.getPost;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,33 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "doCollectServlet")
 public class doCollectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BufferedReader br = request.getReader();
-        StringBuilder sb = new StringBuilder("");
-
         String method = request.getParameter("method");
-
-        String str;
-        while ((str = br.readLine()) != null) {
-            sb.append(str);
-        }
-        br.close();
 
         response.setContentType("text/html");
 
-        if (method != null && new CookieDaoServlet().checkLogined(request)) {
-            String userId = new CookieDaoServlet().getValueByKey(request, "userId");
+        if (method != null && new CookieDao().checkLogined(request)) {
+            String userId = new CookieDao().getValueByKey(request, "userId");
 
             if (method.equals("clearAll")) {
                 new collectDao().clearAll(Integer.valueOf(userId));
             } else {
-                JSONObject json = new JSONObject(sb.toString());
+                JSONObject json = new getPost().getPostJson(request);
 
                 if (json != null && json.has("uuid")) {
                     String uuid = json.getString("uuid");

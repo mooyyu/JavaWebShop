@@ -181,4 +181,13 @@
         <servlet-name>rechargeServlet</servlet-name>
         <url-pattern>/shop/rechargeServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>createBookItemServlet</servlet-name>
+        <servlet-class>shop.createBookItemServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>createBookItemServlet</servlet-name>
+        <url-pattern>/shop/createBookItemServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

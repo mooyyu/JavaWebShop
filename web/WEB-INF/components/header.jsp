@@ -29,7 +29,7 @@
                 <div class="dropdown-menu" aria-labelledby="friendsDropdown">
                     <a href="https://mooyyu.cn" target="_blank" class="dropdown-item">mooyyu.cn</a>
                     <div class="dropdown-divider"></div>
-                    <a href="https://blog.mooyyu.cn" target="_blank" class="dropdown-item">Blog</a>
+                    <a href="https://blog.mooyyu.cn" target="_blank" class="dropdown-item">Blog(需科学上网)</a>
                     <a href="http://toys.mooyyu.cn" target="_blank" class="dropdown-item">Toys!</a>
                 </div>
             </li>

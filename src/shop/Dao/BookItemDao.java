@@ -109,6 +109,26 @@ public class BookItemDao {
         return null;
     }
 
+    public void createItem(String uuid, int catagoryId, String name, String author, int hownew, int price, String info, int userId, String image) {
+        if (new catagoryDao().hasId(catagoryId)) {
+            String sql = "insert into book(uuid, time, userId, name, author, hownew, price, catagoryId, image, info) values(?, now(), ?, ?, ?, ?, ?, ?, ?, ?);";
+            try {
+                JdbcUtils.beginTransaction();
+
+                qr.update(sql, uuid, userId, name, author, hownew, price, catagoryId, image, info);
+
+                JdbcUtils.commitTransaction();
+            } catch (SQLException e) {
+                try {
+                    JdbcUtils.rollbackTransaction();
+                } catch (SQLException sqle) {
+                    sqle.printStackTrace();
+                }
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void updateItem(String uuid, int catagoryId, String name, String author, int hownew, int price, String info) {
         if (new catagoryDao().hasId(catagoryId)) {
             String sql = String.format("update book set name='%s', author='%s', catagoryId=%d, hownew=%d, price=%d, info='%s' where uuid='%s' and status=1;"

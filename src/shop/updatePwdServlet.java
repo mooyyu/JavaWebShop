@@ -1,9 +1,10 @@
 package shop;
 
 import org.json.JSONObject;
-import shop.Dao.CookieDaoServlet;
+import shop.Dao.CookieDao;
 import shop.Dao.connectDao;
 import shop.Dao.userDao;
+import shop.utils.getPost;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,19 +21,10 @@ public class updatePwdServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
 
-        BufferedReader br = request.getReader();
-        StringBuilder sb = new StringBuilder("");
-
-        String str;
-        while ((str = br.readLine()) != null) {
-            sb.append(str);
-        }
-        br.close();
-
-        JSONObject pwd = new JSONObject(sb.toString());
+        JSONObject pwd = new getPost().getPostJson(request);
         if (pwd.has("oldpwd") && pwd.has("newpwd") && pwd.has("confirmpwd")) {
-            if (new CookieDaoServlet().checkLogined(request)) {
-                String logined_email = new CookieDaoServlet().getValueByKey(request, "logined_email");
+            if (new CookieDao().checkLogined(request)) {
+                String logined_email = new CookieDao().getValueByKey(request, "logined_email");
                 if (new connectDao().checkLogin(logined_email, pwd.getString("oldpwd"))) {
                     if (pwd.getString("newpwd").equals(pwd.getString("confirmpwd"))) {
                         new userDao().updatePwd(logined_email, pwd.getString("newpwd"));

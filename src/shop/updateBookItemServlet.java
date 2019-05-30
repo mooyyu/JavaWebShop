@@ -2,8 +2,8 @@ package shop;
 
 import org.json.JSONObject;
 import shop.Dao.BookItemDao;
-import shop.Dao.CookieDaoServlet;
-import shop.Dao.connectDao;
+import shop.Dao.CookieDao;
+import shop.utils.getPost;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,18 +18,9 @@ public class updateBookItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BufferedReader br = request.getReader();
-        StringBuilder sb = new StringBuilder("");
-
-        String str;
-        while ((str = br.readLine()) != null) {
-            sb.append(str);
-        }
-        br.close();
-
-        JSONObject book = new JSONObject(sb.toString());
+        JSONObject book = new getPost().getPostJson(request);
         if (book.has("uuid") && book.has("catagoryId") && book.has("name") && book.has("author") && book.has("hownew") && book.has("price") && book.has("info")) {
-            if (new CookieDaoServlet().checkLogined(request)) {
+            if (new CookieDao().checkLogined(request)) {
                 new BookItemDao().updateItem(
                         book.getString("uuid"),
                         Integer.valueOf(book.getString("catagoryId")),

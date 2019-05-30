@@ -1,6 +1,6 @@
 package shop;
 
-import shop.Dao.CookieDaoServlet;
+import shop.Dao.CookieDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +14,7 @@ public class userCenterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (new CookieDaoServlet().checkLogined(request)) {
+        if (new CookieDao().checkLogined(request)) {
             request.getRequestDispatcher("/WEB-INF/shop/userCenter.jsp").forward(request, response);
         } else {
             response.sendRedirect("/login.jsp");

@@ -1,22 +1,21 @@
 package shop;
 
 import org.json.JSONObject;
+import shop.Dao.CookieDao;
 import shop.Dao.connectDao;
 import shop.Dao.userDao;
+import shop.utils.getPost;
 import shop.utils.md5;
 import shop.utils.sendEmail;
-import shop.Dao.CookieDaoServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 @WebServlet(name = "checkLoginServlet")
 public class checkLoginServlet extends HttpServlet {
@@ -33,20 +32,11 @@ public class checkLoginServlet extends HttpServlet {
 
     private void register(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BufferedReader br = request.getReader();
-        StringBuilder sb = new StringBuilder("");
-
-        String str;
-        while ((str = br.readLine()) != null) {
-            sb.append(str);
-        }
-        br.close();
-
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         PrintWriter writer = response.getWriter();
 
-        JSONObject registerInfo = new JSONObject(sb.toString());
+        JSONObject registerInfo = new getPost().getPostJson(request);
 
         if (registerInfo.has("name") && registerInfo.has("email") && registerInfo.has("phone") && registerInfo.has("sex") && registerInfo.has("address") && registerInfo.has("info") && registerInfo.has("pwd") && registerInfo.has("confirmPwd")) {
             String name = registerInfo.getString("name");
@@ -92,24 +82,13 @@ public class checkLoginServlet extends HttpServlet {
 
     private void login(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BufferedReader br = request.getReader();
-        StringBuilder sb = new StringBuilder("");
-
-        String str;
-        while ((str = br.readLine()) != null) {
-            sb.append(str);
-        }
-        br.close();
-
         response.setContentType("text/html");
         PrintWriter writer = response.getWriter();
 
-        // todo: 传参,记住登录
-
-        JSONObject loginInfo = new JSONObject(sb.toString());
+        JSONObject loginInfo = new getPost().getPostJson(request);
         userDao con = new userDao();
         if (loginInfo.has("email") && loginInfo.has("password") && new connectDao().checkLogin(loginInfo.getString("email"), loginInfo.getString("password"))) {
-            CookieDaoServlet cookieDao = new CookieDaoServlet();
+            CookieDao cookieDao = new CookieDao();
 
             cookieDao.addCookie(response, "logined_email", loginInfo.getString("email"), -1);
             cookieDao.addCookie(response, "check_str", md5.createMD5(loginInfo.getString("password")), -1);

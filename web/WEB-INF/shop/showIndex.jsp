@@ -19,7 +19,7 @@
     
     <title>分享商城</title>
   </head>
-  <body style="min-height: 100vh; min-width: 1100px; position: relative;">
+  <body style="min-height: 100vh; min-width: 1120px; position: relative;">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="/resource/js/jquery.min.js"></script>
@@ -42,7 +42,7 @@
 
       <div class="col-9" style="min-height: 80vh;" id="pagination">
         <div class="container">
-          <div class="alert alert-primary" role="alert">
+          <div class="alert alert-white h5 text-info" role="alert">
             <c:out value="${showTitle}"></c:out>
           </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="container-fluid">
           <c:forEach var="item" items="${itemlist}">
             <div class="card float-left m-1 d-none" style="width: 12rem;" id="${item.rownum}" >
-              <img uuid="${item.uuid}" v-on:click="showItem" class="card-img-top" src="/book_img/${item.image}" alt="Card image cap">
+              <img uuid="${item.uuid}" v-on:click="showItem" class="card-img-top" style="height: 190px;" src="/book_img/${item.image}" alt="Card image cap">
               <div class="card-body">
                 <p class="card-text text-nowrap text-truncate">${item.name}</p>
                 <ul class="list-group list-group-flush text-nowrap text-truncate">
