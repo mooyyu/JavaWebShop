@@ -47,6 +47,16 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>SwitchStaticResourceLocationFilter</filter-name>
+        <filter-class>Filter.SwitchStaticResourceLocationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SwitchStaticResourceLocationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
     <servlet>
         <servlet-name>indexServlet</servlet-name>
         <servlet-class>shop.indexServlet</servlet-class>

@@ -33,7 +33,7 @@
     <c:forEach var="item" items="${sold}">
         <div id="${item.rownum}" class="row border rounded my-1 py-1 d-none" style="height: 75px;" >
             <div class="col-2" style="min-width: 80px;">
-                <img uuid="${item.uuid}" class="h-100" src="/book_img/${item.image}">
+                <img uuid="${item.uuid}" class="h-100" src="${StaticResourceLocation}${item.image}">
             </div>
             <div class="col-10 my-auto">
                 <p class="card-text text-nowrap text-truncate h5" style="font-weight: normal;"><span class="badge badge-pill badge-${statusColor[item.orderStatus]}">${statusInfo[item.orderStatus]}</span>${item.name}</p>

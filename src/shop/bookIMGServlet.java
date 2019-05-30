@@ -12,9 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
-@MultipartConfig(location="/Users/mooyyu/IdeaProjects/Shop/book_img/")
+//@MultipartConfig(location="/Users/mooyyu/IdeaProjects/Shop/book_img/")
+@MultipartConfig(location="/www/wwwroot/StaticResource/Shop/book_img/")
 @WebServlet(name = "bookIMGServlet")
 public class bookIMGServlet extends HttpServlet {
+//    private String fileLocation = "/Users/mooyyu/IdeaProjects/Shop/book_img/";
+    private String fileLocation = "/www/wwwroot/StaticResource/Shop/book_img/";
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,11 +35,11 @@ public class bookIMGServlet extends HttpServlet {
     public void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String referer = request.getHeader("referer");
-        if (referer.startsWith("http://localhost:8080/shop/editBookItemServlet?uuid=") && referer.split("=").length == 2 && referer.split("=")[1].length() == 32) {
+        if (referer.split("=").length == 2 && referer.split("=")[1].length() == 32) {
             String uuid = referer.split("=")[1];
             String imgUrl = new BookItemDao().getIMGUrl(uuid);
             if (imgUrl != null) {
-                File oldIMG = new File("/Users/mooyyu/IdeaProjects/Shop/book_img/" + imgUrl);
+                File oldIMG = new File(fileLocation + imgUrl);
                 if (oldIMG.exists() && oldIMG.delete()) {
                     String newUrl = CommonUtils.uuid() + ".jpg";
                     request.getPart("img").write(newUrl);
@@ -48,7 +52,7 @@ public class bookIMGServlet extends HttpServlet {
     public void create(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String newUrl = CommonUtils.uuid() + ".jpg";
-        File oldIMG = new File("/Users/mooyyu/IdeaProjects/Shop/book_img/" + newUrl);
+        File oldIMG = new File(fileLocation + newUrl);
         if (!oldIMG.exists()) {
             request.getPart("img").write(newUrl);
             response.getWriter().print(newUrl);

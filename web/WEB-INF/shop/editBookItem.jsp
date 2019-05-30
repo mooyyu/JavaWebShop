@@ -55,7 +55,7 @@
 
     <div class="row">
         <div class="col-3">
-            <img id="bookIMG" class="rounded w-100 my-3" src="/book_img/${item.image}">
+            <img id="bookIMG" class="rounded w-100 my-3" src="${StaticResourceLocation}${item.image}">
             <div class="custom-file">
                 <label class="custom-file-label" for="inputGroupIMG" style="font-size: 12px;">350*500;128k</label>
                 <input type="file" onchange="checkIMG(this)" accept="image/jpg" class="custom-file-input" id="inputGroupIMG">
