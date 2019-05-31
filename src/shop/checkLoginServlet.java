@@ -60,7 +60,7 @@ public class checkLoginServlet extends HttpServlet {
                         }
                     } else {
                         if (new userDao().registerUser(name, email, Integer.valueOf(sex), phone, address, info, pwd)) {
-                            if (sendEmail.checkRegister(email, md5.createMD5(pwd))) {
+                            if (new sendEmail().checkRegister(email, md5.createMD5(pwd))) {
                                 writer.println("已发送验证邮件至注册邮箱,请检查邮件以完成注册.");
                             } else {
                                 writer.println("发送验证邮件失败,请联系管理员.");

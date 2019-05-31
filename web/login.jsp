@@ -134,7 +134,7 @@
         <div class="col-sm-10 input-group">
             <input v-on:keyup.enter="register" id="confirmPwd" v-model:value="confirmPwd" type="password" maxlength="26" class="form-control" placeholder="请再次输入密码">
             <div class="input-group-prepend">
-                <button class="btn bg-danger" type="button" v-on:click="register">Register</button>
+                <button id="registerButton" class="btn bg-danger" type="button" v-on:click="register">Register</button>
             </div>
         </div>
     </div>
@@ -164,6 +164,6 @@
 
 <jsp:include page="./WEB-INF/components/footer.jsp"></jsp:include>
 
-<script src="resource/function/login.js?v=1.6"></script>
+<script src="resource/function/login.js?v=1.7"></script>
 </body>
 </html>

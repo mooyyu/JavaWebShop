@@ -47,6 +47,7 @@ var registerapp = new Vue({
                     registerapp.registerAns = "两次密码不一致!";
                     $('div#registeralert').modal('show');
                 } else {
+                    $('button#registerButton').addClass('disabled');
                     axios.post('/shop/checkLoginServlet?method=register', {
                         name: registerapp.name,
                         email: registerapp.email,
@@ -59,6 +60,7 @@ var registerapp = new Vue({
                     }).then(function(res) {
                         registerapp.registerAns = "注册结果:" + res.data;
                         $('div#registeralert').modal('show');
+                        $('button#registerButton').removeClass('disabled');
                     }).catch(function(error) {
                         console.info(error);
                     });

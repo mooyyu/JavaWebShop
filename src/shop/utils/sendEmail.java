@@ -3,9 +3,12 @@ package shop.utils;
 import cn.itcast.mail.Mail;
 import cn.itcast.mail.MailUtils;
 
+import javax.mail.Authenticator;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import java.io.IOException;
+import java.util.Properties;
 
 /**
  * 发送邮件
@@ -17,7 +20,7 @@ public class sendEmail {
      * @param check_str
      * @return
      */
-    static public boolean checkRegister(String email, String check_str) {
+    public boolean checkRegister(String email, String check_str) {
 //        String host = "localhost:8080";
         String host = "shop.mooyyu.cn";
         String content =
@@ -315,8 +318,24 @@ public class sendEmail {
                         "\n" +
                         "</html>";
 
-        Session session = MailUtils.createSession("smtp.qq.com", "name", "password");
-        Mail mail = new Mail("emailAddress", email, "注册验证", content);
+        Properties prop = new Properties();
+        prop.setProperty("mail.host", "smtp.qq.com");// 指定主机
+        prop.setProperty("mail.smtp.auth", "true");// 指定验证为true
+        prop.put("mail.smtp.socketFactory.port", "465");
+        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        prop.setProperty("mail.smtp.socketFactory.fallback", "false");
+        prop.setProperty("mail.smtp.socketFactory.port", "465");
+
+        // 创建验证器
+        Authenticator auth = new Authenticator() {
+            public PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("name", "password");
+            }
+        };
+        // 获取session对象
+        Session session = Session.getInstance(prop, auth);
+
+        Mail mail = new Mail("mooyyucrab@qq.com", email, "注册验证", content);
         try {
             MailUtils.send(session, mail);
             return true;
