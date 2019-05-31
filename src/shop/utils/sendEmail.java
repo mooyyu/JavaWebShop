@@ -18,6 +18,8 @@ public class sendEmail {
      * @return
      */
     static public boolean checkRegister(String email, String check_str) {
+//        String host = "localhost:8080";
+        String host = "shop.mooyyu.cn";
         String content =
                 "<!doctype html>\n" +
                         "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n" +
@@ -217,7 +219,7 @@ public class sendEmail {
                         "                  <tr>\n" +
                         "                    <td align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n" +
                         "                      <div style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:center;color:#555555;\">\n" +
-                        "                        <h2><a href=\"http://localhost:8080/shop/checkRegisterServlet?email=" + email + "&check_str=" + check_str + "\">点击此处验证</a></h2>\n" +
+                        "                        <h2><a href=\"http://" + host + "/shop/checkRegisterServlet?email=" + email + "&check_str=" + check_str + "\">点击此处验证</a></h2>\n" +
                         "                      </div>\n" +
                         "                    </td>\n" +
                         "                  </tr>\n" +
