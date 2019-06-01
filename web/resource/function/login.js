@@ -43,7 +43,11 @@ var registerapp = new Vue({
     methods: {
         register: function() {
             if (registerapp.name != "" && registerapp.email != "" && registerapp.sex != "" && registerapp.pwd != "" && registerapp.confirmPwd != "") {
-                if (registerapp.pwd != registerapp.confirmPwd) {
+                var reg = /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/;
+                if (!reg.test(this.email)) {
+                    registerapp.registerAns = "请输入正确的邮箱地址!";
+                    $('div#registeralert').modal('show');
+                } else if (registerapp.pwd != registerapp.confirmPwd) {
                     registerapp.registerAns = "两次密码不一致!";
                     $('div#registeralert').modal('show');
                 } else {
