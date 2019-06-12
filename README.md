@@ -11,3 +11,7 @@
 > 更新于5.30
 
 ![shop_db](IMGForREADME/shop_db.svg)
+
+## 预览
+
+![shop_show](IMGForREADME/shop_show.jpg)
