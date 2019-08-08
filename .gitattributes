@@ -1,2 +1,2 @@
-*.js linguist-language=java
-*.css linguist-language=java
+/web/resource/css/* linguist-vendored
+/web/resource/js/* linguist-vendored
